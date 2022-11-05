@@ -5,6 +5,7 @@
   font-display: block;
   src: url(/fonts/Inter-roman.latin.var.woff2) format('woff2');
 }
+
 @font-face {
   font-family: 'Inter var';
   font-style: italic;
@@ -25,6 +26,7 @@ body {
   font-variant: common-ligatures contextual;
   letter-spacing: -0.02em;
 }
+
 b,
 strong,
 h3,
@@ -33,15 +35,17 @@ h5,
 h6 {
   font-variation-settings: 'wght' 650;
 }
+
 h1 {
   font-variation-settings: 'wght' 850;
 }
+
 h2 {
   font-variation-settings: 'wght' 750;
 }
 
 @media screen and (min-device-pixel-ratio: 1.5),
-  screen and (min-resolution: 1.5dppx) {
+screen and (min-resolution: 1.5dppx) {
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -62,4 +66,105 @@ img.next-image {
 
 .nav-line .nav-link {
   color: #69778c;
+}
+
+p,
+ol li {
+  text-align: left;
+}
+
+.center-caption p {
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+header p {
+  text-align: center;
+}
+
+article>h1 {
+  margin-top: 5px;
+}
+
+article,
+#main-content {
+  max-width: 1000px;
+  margin: 0px auto;
+}
+
+@media screen and (max-width: 1200px) {
+
+  article,
+  #main-content {
+    max-width: auto;
+    margin: 50px;
+  }
+}
+
+ul {
+  text-align: left;
+}
+
+h3.MuiTypography-root {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+header.MuiAppBar-root,
+div.MuiToolbar-root {
+  min-height: 55px;
+}
+
+header a.MuiTypography-root,
+header button.MuiButtonBase-root {
+  color: #000;
+}
+
+header #footer a.MuiTypography-root,
+header #footer p {
+  font-size: 13px;
+  color: #FFF;
+}
+
+#mobile-nav a {
+  display: block;
+  text-align: center;
+  margin: 10px;
+}
+
+
+/* Draggable Stuff */
+.react-draggable {
+  width: 78px;
+  border: 1px solid #40637A;
+  text-align: center;
+  position: absolute;
+  background: #FFF;
+  z-index: 100;
+}
+
+.react-draggable span {
+  width: 68px;
+  height: 100px;
+}
+
+.react-draggable p {
+  font-size: 12px;
+  display: block;
+  text-align: center;
+}
+
+/* Color Palette */
+div.detail div.palette-detail {
+  text-align: left;
+  margin: 5px;
+}
+
+div.detail div.match-detail {
+  text-align: right;
+  position: absolute;
+  bottom: 2px;
+  right: 7px;
+  font-weight: normal;
 }

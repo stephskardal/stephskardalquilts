@@ -1,0 +1,23 @@
+---
+title: 'Color Palette Tool'
+date: '2019-11-05'
+---
+
+import ColorPalette from 'components/ColorPalette'
+
+# Color Palette Tool
+
+<ColorPalette />
+
+### Hi!
+
+I accidentally got distracted working on my color theory and technology talk for [QuiltCon](https://www.quiltcon.com/) and wrote a tool that pulls a color palette from an image and matches to various fabric lines in my solids library. This idea was heavily inspired by [Anne Sullivan of Play Crafts](http://www.play-crafts.com/).
+
+To use the tool, upload an image and select between solids lines. You can also toggle to view the palette only (and corresponding saturation and value of each color scaled between 0 and 1), or toggle to view the matching swatch only.
+
+Some important notes on the tool:
+
+- The images are not uploaded to my server. They are only saved to the browser temporarily.
+- Color match will be most accurate if the image is cropped very tightly and photographed with white light (i.e. no influence on color from the lighting). On many of my color tools, I suggest the tool be used a starting point. I recommend checking physical swatches of color matches because color discrepancies can come from image quality, lighting (including shadows), and color representation discrepancies (physical vs. digital).
+- The tool uses open source plugins ([colorThief.js](https://github.com/lokesh/color-thief) and [chroma.js](https://gka.github.io/chroma.js/)) for color palette calculations and color distance calculations. The color palette tool clusters pixels together to calculate the palette.
+- Note that this is an initial release. Please let me know if you see any issues at stephskardal at gmail dot com. Thanks much!

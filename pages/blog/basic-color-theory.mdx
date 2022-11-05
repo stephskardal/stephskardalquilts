@@ -1,0 +1,68 @@
+---
+title: 'basic color theory'
+date: '2018-09-07'
+---
+
+import ColorTheory from 'components/ColorTheory'
+import { Grid, Typography } from '@mui/material'
+
+# Basic Color Theory
+
+    <Grid container spacing={2}>
+          <Grid item md={4} xs={12} sx={{ margin: "0px auto" }}>
+
+<ColorTheory />
+          </Grid>
+          <Grid item md={8} xs={12}>
+
+    <Typography>
+
+Hi there, friends! I recently [shared a cool visualization on fabric solids](http://www.stephskardalquilts.com/solids-visualization-hue-saturation/), and now I want to go back to the basics a bit to write about the pigment color wheel and color spaces (CMYK, RGB).
+
+</Typography>
+<Typography component="h3" sx={{ fontWeight: "bold", margin: "10px 0px", fontSize: "1.17em" }}>The Pigment Color Wheel: RYB</Typography>
+<Typography sx={{ marginBottom: "15px" }}>
+Long ago, before we had to worry about screen time limits for ourselves or our children, the science of light was being explored and the pigment color wheel that we now know began to be theorized. [Johann Wolfgang von Goethe](https://en.wikipedia.org/wiki/Johann_Wolfgang_von_Goethe) receives the credit for creating what we know as the RYB (red-yellow-blue) color wheel from physiological studies of colors and perception, written up in his book in 1810, [Theory of Colors](https://en.wikipedia.org/wiki/Theory_of_Colours). Sir Isaac Newton had done most of the scientific research up to that point on color wavelengths in light. A google search of ["goethe vs. newton"](https://www.google.com/search?q=goethe+vs+newton) results in a handful of resources if you are interested in going deeper there!
+</Typography>
+<Typography>
+Anyways… the artist, painters, or pigment color wheel is taught as the red-yellow-blue color wheel, and I imagine my own kindergartner will be taught this in her art class. Red, yellow, and blue are the primary colors. Mixing those colors will get us secondary colors, and mixing in between those will get us tertiary colors, and so on. “Complementary” colors are those that are across from each other on the color wheel that appear most vivid when paired, according to Goethe. Mixing those complementary colors produces gray. Tints are those primary and secondary colors mixed with white, and shades are those colors mixed with black. See below for more on color harmonies.
+</Typography>
+</Grid>
+</Grid>
+
+### Enter CMYK and Pantone
+
+Much later, in the early 1900s, CMYK (cyan-magenta-yellow-key/black) color printing was introduced to yield the ability to print many different colors, combined with half-toning. The best source on CMYK printing is on Wikipedia [here](https://en.wikipedia.org/wiki/CMYK_color_model). And then, just a bit later in 1956, the proprietary [Pantone](https://en.wikipedia.org/wiki/Pantone) (Hexachrome) system was developed to increase the colors available for printing. [Here](https://en.wikipedia.org/wiki/Color_printing) is more history on color printing. While CMYK wasn’t the first color process printing with more than one color, it remains popular and functional to this day.
+
+### Enter RGB
+
+Jump in your DeLorean, and fast forward a few years! [It was already established](https://en.wikipedia.org/wiki/Trichromacy) that red, green, and blue are the most distinguishable colors to the human eye. Computer graphics were designed around that established theory and adopted in early screen displays and in personal computers. Computers encode RGB values into a hex code, which breaks down to represent a level of red, green, and blue, each in a number ranging from 0 to 255. This isn’t really important unless you work directly with hex codes in software or image processing (like I do).
+
+### Forget All That (Sort Of)
+
+In the sewing world, the most common color spaces we encounter on a daily basis could be related to fabric dye (pigment based), fabric printing (usually CMYK from what I’ve found), and/or computer graphics encoded in RGB. The translation between color spaces might be seamless to us, and modern tools make that translation very easy (e.g. Photoshop allows you to switch from RGB to CMYK with one click), but sometimes we lose color nuances in that translation.
+
+While I don’t think anyone needs to know the nitty gritty details on color spaces as you embark on the journey of making a quilt, I think it’s important to have a basic understanding of those color spaces and why colors might appear differently in different mediums. Fabric is dyed (e.g. Kona with reactive dyes), and then photographed and saved in RGB space and presented to us online (either in images or hex codes directly), and sometimes swatch sets are printed in CMYK as a guide. Those are three different ways that a single fabric solid color (not even getting to prints) can be represented in our world.
+
+Quilters use various digital design tools to experiment with color in the RGB space, but then once the fabric arrives or swatches reviewed, the difference in color might be disappointing. That’s no fun, but now you know why!
+
+### The Painters Color Wheel Harmonies
+
+Now, back to color theory. Most discussion of color theory and color harmonies refers to the RYB color wheel, and that’s what I’ll get to here. Color theory describes some basic color harmonies, or color combinations that work well together, such as:
+
+- Analogous: Color schemes with colors next to each other on the pigment color wheel.
+- Complementary: Color schemes with two colors opposite from each other on the pigment color wheel.
+- Triadic: Color schemes with three colors evenly spaced around the color wheel.
+
+It’s not worth reinventing the wheel on color wheel harmony examples; here are a couple of tools great for identifying some color harmonies:
+
+- [http://paletton.com/](http://paletton.com/)
+- [https://color.adobe.com/create/color-wheel/](https://color.adobe.com/create/color-wheel/)
+
+### Conclusion!
+
+Ok, you made it through all that - woohoo! In summary, my takeaways are: The RYB (red-yellow-blue) pigment color wheel is based on Goethe’s Theory of Colours, which was based on physiological studies, but science has advanced our knowledge of color formulations and color space since then. Color printing and computer graphics operate in two different color spaces, and the translation between the various spaces can be relatively seamless to us. Color harmonies (analogous, complementary, triadic, etc.) refer to color combinations based on the pigment color wheel, and there are great tools available for playing around with color combinations for quilty inspiration.
+
+Color harmonies are great, but how do we choose fabrics that may not represent all the parts of the color wheel equally? In my next post, I’ll share more visualizations of how fabrics fit in with our RYB pigment color wheel, and hopefully provide some options for choosing color harmonies. Stay tuned!
+
+A quick thanks to Caroline Hadley of [Geometriquilt](https://geometriquilt.com/) for a sanity check edit on this summary. She offers technical editing, for anyone interested.

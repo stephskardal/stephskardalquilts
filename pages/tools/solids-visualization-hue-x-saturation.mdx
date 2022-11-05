@@ -1,0 +1,18 @@
+---
+title: 'Solids Visualization: hue x saturation'
+date: '2018-08-29'
+---
+
+# Solids Visualization: Hue x saturation
+
+import ColorWheel from 'components/ColorWheel'
+
+<ColorWheel />
+
+Hi there, quilting friends! Last week, when I [blogged about open sourcing fabric solids](http://www.stephskardalquilts.com/solids-library-now-on-github/), I struggled with how to sort the colors. Any way you sort in one dimensional (e.g. hue) results in losing the effect of other dimensions (e.g. saturation & value). So, I brainstormed data visualization and starting playing with [d3js](https://d3js.org/). I remembered coming across visualizations resembling color wheels, and tried to figure out the visualization to build a color model given a set of colors.
+
+The result is what you see above. There are four tiers of saturation with the highest saturation colors closest to the center. Within that first tier, the colors are sorted by hue around the circle. Colors that are lower in saturation are "children" of the closest hue with highest saturation. This is interactive, too! You can click on any of the sections to see colors lower in saturation with similar hue. Hueless or blacks/greys are listed separately. Finally, you can see all the manufacturers solids together, or limit to a specific set of solids.
+
+I wouldn't call this a color wheel, because it's not representing hues equally, especially in color sets where there aren't colors high in saturation with a specific hue. But, I think it's a different way to explore colors of fabric offered instead of a linear model. And an interesting way to compare different sets of solids.
+
+**More Disclaimers**: The solids here are based off of swatches available online, which are often provided from the manufacturer, so be aware there may be color discrepancies from actual fabric depending on what the manufacturer has shared. This data is open sourced, so it can receive contributions to fix incorrect data. It's hard to pin down the original creator of zoomable sunbursts for d3js, but the code used above was adapted from several code snippets out there, and an original sunburst design from [John Stasko](https://www.cc.gatech.edu/gvu/ii/sunburst/).
