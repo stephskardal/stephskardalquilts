@@ -1,0 +1,38 @@
+div#recent-swatches h5 {
+  margin: 0px;
+}
+div.swatching {
+  float: right;
+  width: 47%;
+  padding-left: 2%;
+}
+a.swatch {
+  border: 1px solid #FFF;
+  display: inline-block;
+  margin-right: 3px;
+}
+a.swatch span {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  display: block;
+}
+a.swatch.selected {
+  border: 1px solid #000;
+}
+#color-me {
+  width: 50%;
+  float: left;
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 767px) {
+  #color-me {
+    width: 100%;
+    float: none;
+    margin-bottom: 20px;
+  }
+  div.swatching {
+    width: 100%;
+    float: none;
+  }
+}

@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  background: #333;
+}
+
+circle {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+</style>
+<svg width="100%" height="100%" viewbox="0 0 6500 5525"><g transform="translate(3250,2612)"></g></svg>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="//d3js.org/d3.v4.0.0-alpha.35.min.js"></script>
+<script src="/custom_js/chroma.min.js"></script>
+<script>
+
+d3.text("/custom_js/fabricSwatches.js?v=2", function(error, root) {
+  eval(root);
+
+  var unsortedColors = [];
+  var colorArray = [];
+
+  jQuery.each(fabricSwatches, function(fabricKey, data) {
+    jQuery.each(data.swatches, function(key, value) {
+      var hsl = chroma(value).hsl();
+      if(hsl[0] != 0 && hsl[1] != 0) {
+        //var color = new Color(el);
+        //colorSorting.constructColor(color);
+        unsortedColors.push({ hex: value, hue: hsl[0], sat: hsl[1] });
+      }
+    });
+  });
+
+var key = 'hue';
+var key2 = 'sat';
+jQuery.each(unsortedColors.sort(function(a, b) { return b[key]*b[key2] - a[key]*a[key2]; }), function(i, el) {
+  colorArray.push(el.hex);
+}); 
+  
+
+var svg = d3.select("svg");
+var width = 6500,
+    height = 5525,
+    size = 6500;
+
+var m = 12; 
+var nodes = [];
+
+  jQuery.each(colorArray, function(i, el) {
+    var hsl = chroma(el).hsl();
+    var sat = hsl[1];
+    var radius = 5 + sat*40;
+    var arrLoop = [5+sat*30, 3+sat*20, 4+sat*35, 5+sat*35, 6+sat*20, 7+sat*15, 5+sat*25, 5+sat*40];
+
+    jQuery.each(arrLoop, function(i, val) {
+      nodes.push({
+        r: val,
+        hex: el
+      });
+    });
+  });
+
+  jQuery.each(colorArray, function(i, el) {
+    var hsl = chroma(el).hsl();
+    var sat = hsl[1];
+    var radius = 5 + sat*40;
+    var arrLoop = [5+sat*30, 3+sat*20, 4+sat*35, 5+sat*35, 6+sat*20, 7+sat*15, 5+sat*25, 5+sat*40];
+    
+    jQuery.each(arrLoop, function(i, val) {
+      nodes.push({
+        r: val,
+        hex: el
+      });
+    });
+  });
+
+  jQuery.each(colorArray, function(i, el) {
+    var hsl = chroma(el).hsl();
+    var sat = hsl[1];
+    var radius = 5 + sat*40;
+    var arrLoop = [5+sat*30, 3+sat*20, 4+sat*35, 5+sat*35, 6+sat*20, 7+sat*15, 5+sat*25, 5+sat*40];
+    
+    jQuery.each(arrLoop, function(i, val) {
+      nodes.push({
+        r: val,
+        hex: el
+      });
+    });
+  });
+
+  d3.packSiblings(nodes); 
+
+  svg
+    .select("g")
+    .selectAll("circle")
+    .data(nodes)
+    .enter().append("circle")
+      .style("fill", function(d) { d.angle = Math.atan2(d.y, d.x); return d.hex; })
+      .attr("cx", function(d) { return Math.cos(d.angle) * (size / Math.SQRT2 + 30); })
+      .attr("cy", function(d) { return Math.sin(d.angle) * (size / Math.SQRT2 + 30); })
+      .attr("r", function(d) { return d.r - 0.25; })
+    .transition()
+      .ease(d3.easeCubicOut)
+      .delay(function(d) { return Math.sqrt(d.x * d.x + d.y * d.y) * 1; })
+      .duration(1000)
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+});
+
+</script>

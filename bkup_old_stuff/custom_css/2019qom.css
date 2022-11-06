@@ -1,0 +1,303 @@
+.postid-11907 #sidebar {
+  display: none;
+}
+.postid-11907 #main {
+  width: 100%;
+}
+
+#courthouse-steps #intro-text {
+  display: flex;
+}
+#courthouse-steps #intro-text img {
+  width: 400px;
+  margin-left: 20px;
+  max-width: none;
+}
+@media only screen and (max-width: 800px) {
+  #courthouse-steps #intro-text {
+    display: block;
+  }
+  #courthouse-steps #intro-text img {
+    width: 100%;
+    margin: 0px;
+  }
+}
+
+#courthouse-steps h2 {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+#courthouse-steps .square {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  position: relative;
+  top: 4.5px;
+}
+#courthouse-steps .inner {
+  width: 72px;
+  height: 72px;
+  float: left;
+  border: 1px solid #000000;
+}
+#courthouse-steps .flex_horizontal {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+#courthouse-steps .flex_vertical {
+  display: flex;
+  flex-direction: column;
+}
+#courthouse-steps .accent {
+  border: 1px solid #028492;
+  background: rgba(2, 132, 130, 0.5);
+}
+#courthouse-steps .background {
+  border: 1px solid #000000;
+}
+#courthouse-steps .strip_horizontal {
+  height: 9px;
+}
+#courthouse-steps .strip_horizontal.outer {
+  height: 13.5px;
+}
+#courthouse-steps .strip_vertical {
+  width: 9px;
+}
+#courthouse-steps .strip_vertical.outer {
+  width: 13.5px;
+}
+#courthouse-steps .strip {
+  height: 18px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  vertical-align: middle;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+#courthouse-steps .block_row_wrapper {
+  transform-origin: top left;
+  /* border: 1px solid red; */
+}
+#courthouse-steps .block_row {
+  display: flex;
+  margin-bottom: 10px;
+}
+#courthouse-steps .block_row > div {
+  margin-right: 10px;
+}
+
+/* Step Specific */
+
+#courthouse-steps #step1 .strip {
+  width: 324px;
+}
+#courthouse-steps #step1 .center_strip {
+  height: 81px;
+  width: 324px;
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 10px;
+  vertical-align: middle;
+  line-height: 81px;
+}
+#courthouse-steps #step2 .right_trim {
+  border-left: 1px dashed #000000;
+  position: absolute;
+  left: 80px;
+  height: 100px;
+  width: 1px;
+  top: 0px;
+}
+#courthouse-steps #step2 #step2-blocks {
+  display: flex;
+  width: 324px;
+  height: 99px;
+}
+#courthouse-steps #step2 #step2-blocks > div {
+  width: 81px;
+  position: relative;
+}
+#courthouse-steps #step2 #step2-blocks div div.strip-top {
+  height: 13.5px;
+  width: 100%;
+  border-right: none;
+  border-left: none;
+}
+#courthouse-steps #step2 #step2-blocks div div.strip-top.last {
+  border-right: 1px solid #028492;
+}
+#courthouse-steps #step2 #step2-blocks div div.strip-middle {
+  height: 72px;
+  width: 100%;
+  border-right: none;
+  border-left: none;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 72px;
+}
+#courthouse-steps #step2 #step2-blocks div div.strip-middle.last {
+  border-right: 1px solid #000000;
+}
+#courthouse-steps #step2 #step2-blocks div div.strip-top.first {
+  border-left: 1px solid #028492;
+}
+#courthouse-steps #step2 #step2-blocks div div.strip-middle.first {
+  border-left: 1px solid #000000;
+}
+
+#courthouse-steps #step4 .strip {
+  height: 13.5px;
+  line-height: 13.5px;
+  margin-bottom: 0px;
+}
+#courthouse-steps #step4 .block_row {
+  margin: 0px;
+}
+#courthouse-steps #step4 .flex_horizontal.outer {
+  margin-bottom: 0px;
+}
+#courthouse-steps #step4 .top_trim {
+  border-left: 1px dashed #000000;
+  position: absolute;
+  top: -13.5px;
+  width: 9px;
+  height: 13.5px;
+  left: 99px;
+}
+#courthouse-steps #step4 .top_trim.double {
+  border-right: 1px dashed #000000;
+}
+#courthouse-steps #step4 .bottom_trim {
+  border-left: 1px dashed #000000;
+  position: absolute;
+  bottom: -13.5px;
+  width: 9px;
+  height: 13.5px;
+  left: 99px;
+}
+#courthouse-steps #step4 .bottom_trim.double {
+  border-right: 1px dashed #000000;
+}
+
+#courthouse-steps #step4 .flex_vertical.outer {
+  width: 99px;
+}
+
+#courthouse-steps #step6 .flex_vertical.outer.trimmed {
+  width: 117px;
+}
+
+#courthouse-steps #step8 .flex_vertical.outer.trimmed {
+  width: 135px;
+}
+#courthouse-steps #step10 .flex_vertical.outer.trimmed {
+  width: 153px;
+}
+#courthouse-steps #step12 .flex_vertical.outer.trimmed,
+#courthouse-steps #intro .flex_vertical.outer.trimmed {
+  width: 171px;
+}
+
+#courthouse-steps #intro .inner {
+  font-size: 12px;
+  vertical-align: middle;
+  line-height: 72px;
+  text-align: center;
+}
+
+#courthouse-steps #step13 .flex_vertical.outer > div.strip_horizontal {
+  height: 100px; 
+}
+#courthouse-steps #step13 .flex_horizontal.outer > div.strip_vertical {
+  width: 100px; 
+}
+#courthouse-steps #step13 .flex_vertical.outer.trimmed {
+  transform: rotate(45deg) translate(-88px);
+  width: 366px;
+}
+#courthouse-steps #step13 .onpoint-wrappers {
+  display: flex;
+}
+#courthouse-steps #step13 .onpoint-wrappers.last {
+  margin-bottom: 20px;
+}
+
+#courthouse-steps #step13 .onpoint-wrapper {
+  flex-shrink: 0;
+  border: 1px solid #000;
+  height: 238px;
+  width: 239px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  margin-right: 30px;
+}
+#courthouse-steps #step13 .hst-wrapper {
+  display: flex;
+  align-items: center;
+}
+#courthouse-steps #step13 .hsts {
+  width: 144px;
+  height: 144px;
+  border: 1px solid #000;
+  overflow: hidden;
+  position: relative;
+  margin-right: 9px;
+  flex-shrink: 0;
+}
+#courthouse-steps #step13 .hsts p {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  font-size: 12px;
+}
+
+#courthouse-steps #step13 .hsts div.special {
+  transform: rotate(45deg) translate(-90px);
+}
+#courthouse-steps #step13 .hsts div.special div.strip_vertical {
+  height: 400px;
+  width: 100px; 
+}
+#courthouse-steps #step13 .hsts div.special div.strip_vertical.first {
+  border: none;
+  border-right: 1px dashed #000;
+}
+#courthouse-steps #step13 .hsts div.special div.strip_vertical.second {
+  border: none;
+}
+
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation: flickerAnimation 3s infinite;
+   -moz-animation: flickerAnimation 3s infinite;
+   -o-animation: flickerAnimation 3s infinite;
+    animation: flickerAnimation 3s infinite;
+}
+
+#courthouse-steps hr,
+#courthouse-steps p.extra {
+  margin-top: 30px;
+}

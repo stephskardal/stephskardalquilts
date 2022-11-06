@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 | Random circles and squares</title>
+        <meta name="author" content="eesur.com">
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.js"></script>
+<script src="/custom_js/chroma.min.js"></script>
+    <script type='text/javascript' src='http://www.quiltfill.com/wp-content/themes/sprout-spoon/js/saveSvgAsPng.js'></script>
+        <script type="text/javascript" src="/custom_js/quickSorting.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+    
+    <style type="text/css">
+        
+        html, body, main {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        svg {
+            width: 100%;
+            height: 99%; /* gets rid of scrollbar */
+        }
+
+        </style>
+    </head>
+    <body>
+<a href="#" id="save-me">Save</a>
+<a href="#" id="change-color">Change Color</a>
+
+    <script>
+
+function saveSvg(svgEl, name) {
+    var svgData = svgEl.outerHTML.replace(/ class=".*?" /g, ' ');
+    var preface = '<?xml version="1.0" standalone="no"?>\r\n';
+    var svgBlob = new Blob([preface, svgData], {type:"image/svg+xml;charset=utf-8"});
+    var svgUrl = URL.createObjectURL(svgBlob);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = svgUrl;
+    downloadLink.download = name;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+}
+
+var strokeColor = '#000000'; //a9a9a9';
+var strokeWidth = '1px';
+
+var buildLayer = function(buildFrom) {
+  var length = buildFrom.length - 1;
+  var result = [];
+  jQuery.each(buildFrom, function(i, value) {
+    result.push(value);
+    var scalePos = i+1;
+    if(i == length) {
+      scalePos = 0;
+    }
+
+    var chromaScale = chroma.scale([buildFrom[i], buildFrom[scalePos]]).colors(3);
+    result.push(chromaScale[1]);
+  });
+  return result;
+};
+
+var shiftColors = function(buildFrom) {
+  var result = [];
+  jQuery.each(buildFrom, function(i, value) {
+    var darkened = chroma(value).darken().saturate(2);
+    var modified = chroma.blend(value, '#4CBBFC', 'multiply');
+    result.push(modified.hex());
+  });
+  return result;
+};
+
+
+  var blues = ['#00acb8', '#a3cfdc'];
+  var artGalleryColors = ['#fcc8a0', '#f7c7c7', '#f0aeb0', '#ef5b57', '#f59887', '#f075ae', '#d73075', '#dc3d65', '#972e4c', '#d62126', '#e35c3c', '#ee7637', '#f69745', '#f6a685', '#d4a04d', '#ffcc56', '#d7bf27', '#fcdd2d', '#9ea74a', '#b7ba69', '#d3d95f', '#e8d88a', '#d1e4c8', '#88a382', '#abd49c', '#d9e488', '#077c8e', '#00acb8', '#04a584', '#6dbfb9', '#a1d9d6', '#c1d7c0', '#a3cfdc', '#659ca3', '#c9e7dd', '#5d7a78', '#386e6e', '#91c8b5', '#507da7', '#516b82', '#63678a', '#bea2b0', '#a3517f', '#745090', '#c1a689']; //, '#93806f', '#b87151', '#8e5739', '#4f403b'];
+  var kaleidoscopeColors = ['#4D693D', '#457D3A', '#6F782A', '#947D17', '#8A7520', '#9B791E', '#CB7917', '#E74D1B', '#C42F1E', '#BB212C', '#C22D25', '#C4353F', '#D05657', '#B32E46', '#AC224E', '#AC224E', '#902147', '#882547', '#7C2241', '#9C3169', '#A92E5A', '#B4597D', '#C688AE', '#AD7A98', '#987693', '#7F7D9A', '#282830', '#414F60', '#2C637D', '#256C84', '#2F859D', '#5E9DA8', '#92A3A4', '#99B5B4', '#B8B1B1', '#535053', '#3E3E43', '#565B69', '#C01F3B', '#4B537E'];
+  var whiteColors = ['#FFFFFF','#FFFFFF'];
+  var reds = ['#902147', '#e06d95']
+  var greens = ['#376a59', '#b4d8cc'];
+
+  var colors = [kaleidoscopeColors, buildLayer(artGalleryColors), whiteColors, buildLayer(buildLayer(buildLayer(blues))), buildLayer(buildLayer(buildLayer(reds))), buildLayer(buildLayer(buildLayer(blues))), buildLayer(buildLayer(buildLayer(greens)))];
+//var sortedColors = colorSorting.sort(colors, 'hue');
+
+var colorPos = 0;
+var b = 0;
+var random = function(low, high) {
+  return Math.floor((Math.random() * (high - low)) + low);
+};
+
+var incrementColor = function() {
+  if(colorPos >= colors.length) {
+    colorPos = 0;
+  }
+  if(b >= colors[colorPos].length) {
+    b = 0;
+  }
+  var color = colors[colorPos][b];
+  b++;
+  return color;
+};
+
+var rotate = function(cx, cy, x, y, angle) {
+    var radians = (Math.PI / 180) * angle,
+        cos = Math.cos(radians),
+        sin = Math.sin(radians),
+        nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
+        ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+    return [nx, ny];
+};
+
+var redrawKaleidoscope = function() {
+  d3.select('svg').remove();
+
+  var maxDimension = 2000;
+
+  var svg = d3.select('body')
+    .append('svg')
+      .attr('id', 'color-me-svg')
+      .attr('width', maxDimension)
+      .attr('height', maxDimension)
+      .attr('xmlns', "http://www.w3.org/2000/svg")
+      .attr('viewBox', '0 0 ' + maxDimension + ' ' + maxDimension);
+
+  var centerP = maxDimension / 2;
+  var radian = 57.2958;
+  var numberSides = random(3, 12);
+  var iterations = 25;
+  
+  for(var j = 0; j<iterations; j++) {
+    var upperRange = centerP - (centerP/iterations)*j;
+    var lowerRange = centerP - (centerP/iterations)*(j+1);
+    var rotation = 360 / numberSides;
+    var halfRotation = rotation / 2;
+
+    var sidePoint = random(lowerRange,upperRange);
+    var adj = Math.cos(halfRotation / radian)*sidePoint;
+    var opp = Math.sin(halfRotation / radian)*sidePoint;
+
+    var randomPoints = random(0, 2);
+
+    if(j == 0) {
+      var sidePoint = maxDimension*5;
+      randomPoints = 0;
+      adj = Math.cos(halfRotation / radian)*sidePoint;
+      opp = Math.sin(halfRotation / radian)*sidePoint;
+    }
+
+    if(randomPoints == 0) {
+      for(var i = 0; i<numberSides; i++) {
+        var points = centerP + ',' + centerP + ' ' + (centerP + adj) + ',' + (centerP + opp) + ' ' + (centerP + adj) + ',' + (centerP - opp);
+        svg.append('polygon')
+         .attr('points', points)
+         .attr('class', 'colored')
+         .style('fill', incrementColor())
+         .style('stroke', strokeColor).style('stroke-width', strokeWidth)
+         .attr('transform', 'rotate(' + i*rotation + ',' + centerP + ',' + centerP + ')');
+      }
+    } else if(randomPoints == 1) {
+      var secondSidePoint = random(lowerRange,upperRange);
+      var lastPeak = undefined;
+      for(var i = 0; i<numberSides; i++) {
+        var points = centerP + ',' + centerP + ' ' + (centerP + adj) + ',' + (centerP + opp) + ' ' + (centerP + secondSidePoint) + ',' + centerP + ' ' + (centerP + adj) + ',' + (centerP - opp);
+      
+        var angle = (i)*rotation;
+        svg.append('polygon')
+         .attr('points', points)
+         .attr('class', 'colored')
+         .style('fill', incrementColor())
+         .style('stroke', strokeColor).style('stroke-width', strokeWidth)
+         .attr('transform', 'rotate(' + angle + ',' + centerP + ',' + centerP + ')');
+      
+        if(lastPeak !== undefined) {
+          var rotatedLastPeak = rotate(centerP, centerP, lastPeak[0], lastPeak[1], rotation);
+          var points2 = (centerP + secondSidePoint) + ',' + centerP + ' ' + (centerP + adj) + ',' + (centerP - opp) + ' ' + rotatedLastPeak[0] + ',' + rotatedLastPeak[1];
+          svg.append('polygon')
+           .attr('points', points2)
+           .style('fill', '#FFFFFF')
+           .style('stroke', strokeColor).style('stroke-width', strokeWidth)
+           .attr('transform', 'rotate(' + angle + ',' + centerP + ',' + centerP + ')');
+         }
+         lastPeak = [(centerP + secondSidePoint), centerP];
+       }
+
+       var rotatedLastPeak = rotate(centerP, centerP, lastPeak[0], lastPeak[1], rotation);
+       var points2 = (centerP + secondSidePoint) + ',' + centerP + ' ' + (centerP + adj) + ',' + (centerP - opp) + ' ' + rotatedLastPeak[0] + ',' + rotatedLastPeak[1];
+       svg.append('polygon')
+         .attr('points', points2)
+         .style('stroke', strokeColor).style('stroke-width', strokeWidth)
+         .style('fill', '#FFFFFF');
+
+     } else {
+       var secondSidePoint = random(lowerRange,upperRange);
+       var secondRotation = random(0, halfRotation); 
+       var adj2 = Math.cos(secondRotation / radian)*secondSidePoint;
+       var opp2 = Math.sin(secondRotation / radian)*secondSidePoint;
+       lastPeak = undefined;
+
+       var withPeaks = [];
+       for(var i = 0; i<numberSides; i++) {
+         var points = centerP + ',' + centerP + ' ' + (centerP + adj) + ',' + (centerP + opp) + ' ' + (centerP + adj2) + ',' + (centerP + opp2) + ' ' + (centerP + adj2) + ',' + (centerP - opp2) + ' ' + (centerP + adj) + ',' + (centerP - opp);
+
+         var angle = (i)*rotation;
+         svg.append('polygon')
+          .attr('points', points)
+          .attr('class', 'colored')
+          .style('fill', incrementColor())
+          .style('stroke', strokeColor).style('stroke-width', strokeWidth)
+          .attr('transform', 'rotate(' + angle + ',' + centerP + ',' + centerP + ')');
+    
+         
+        if(lastPeak !== undefined) {
+          var rotatedLastPeak = rotate(centerP, centerP, lastPeak[0], lastPeak[1], -1*rotation);
+          var points2 = (centerP + adj) + ',' + (centerP + opp) + ' ' + (centerP + adj2) + ',' + (centerP + opp2) + ' ' + rotatedLastPeak[0] + ',' + rotatedLastPeak[1];
+          withPeaks.push({ points: points2, rotation: angle });
+         }
+        lastPeak = [(centerP + adj2),(centerP - opp2)];
+      }
+
+      var rotatedLastPeak = rotate(centerP, centerP, lastPeak[0], lastPeak[1], -1*rotation);
+      var points2 = (centerP + adj) + ',' + (centerP + opp) + ' ' + (centerP + adj2) + ',' + (centerP + opp2) + ' ' + rotatedLastPeak[0] + ',' + rotatedLastPeak[1];
+      withPeaks.push({ points: points2, rotation: 0 });
+      $.each(withPeaks, function(k, el) {
+        svg.append('polygon')
+         .attr('points', el.points)
+         .style('fill', '#FFFFFF')
+         .style('stroke', strokeColor).style('stroke-width', strokeWidth)
+         .attr('transform', 'rotate(' + el.rotation + ',' + centerP + ',' + centerP + ')');
+      });
+    }
+
+    // Randomize # of sizes / angle, related to previous value
+    var randomOperation = random(0, 8);
+    if(randomOperation == 0 && numberSides%2 == 0 && numberSides > 2) {
+//      numberSides = numberSides / 2;
+    } else if(randomOperation > 6 && numberSides < 12) {
+ //     numberSides = numberSides * 2;
+    }
+  }
+};
+
+
+jQuery(document).ready(function() {
+	redrawKaleidoscope();
+  jQuery('#save-me').on('click', function(e) {
+    e.preventDefault();
+    saveSvg(document.getElementById('color-me-svg'), 'exported');
+  });
+  jQuery('#change-color').on('click', function(e) {
+    var b = 0;
+    colorPos+=1;
+    jQuery.each(jQuery('polygon.colored'), function(i, el) {
+      $(el).attr('style', 'fill: ' + chroma(incrementColor()).css() + '; stroke: ' + chroma(strokeColor).css() + '; stroke-width: ' + strokeWidth);
+    });
+  });
+});
+
+
+    </script>
+
+    </body>
+</html>

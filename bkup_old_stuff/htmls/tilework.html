@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 | Random circles and squares</title>
+        <meta name="author" content="eesur.com">
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.js"></script>
+        <script type="text/javascript" src="/custom_js/quickSorting.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+        <style type="text/css">
+        
+        html, body, main {
+            height: 100%;
+            background-color: #130C0E;
+            padding: 0;
+            margin: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        svg {
+            width: 100%;
+            height: 99%; /* gets rid of scrollbar */
+        }
+
+        </style>
+    </head>
+    <body>
+
+    <script>
+
+jQuery(document).ready(function() {
+var maxDimensionX = 20;
+var maxDimensionY = 20;
+// var colors = Object.values(fabricSwatches.rileyBlake.swatches);
+var colors = ['#4D693D', '#457D3A', '#6F782A', '#947D17', '#8A7520', '#9B791E', '#CB7917', '#E74D1B', '#C42F1E', '#BB212C', '#C22D25', '#C4353F', '#D05657', '#B32E46', '#AC224E', '#AC224E', '#902147', '#882547', '#7C2241', '#9C3169', '#A92E5A', '#B4597D', '#C688AE', '#AD7A98', '#987693', '#7F7D9A', '#282830', '#414F60', '#2C637D', '#256C84', '#2F859D', '#5E9DA8', '#92A3A4', '#99B5B4', '#B8B1B1', '#535053', '#3E3E43', '#565B69', '#C01F3B', '#4B537E'];
+var sortedColors = colorSorting.sort(colors, 'hue');
+for(var i = 0; i<0; i++) {
+  var shifted = sortedColors.pop();
+  sortedColors.unshift(shifted);
+}
+
+// SVG viewport
+var svg = d3.select('body')
+  .append('svg')
+    .attr('width', maxDimensionX)
+    .attr('height', maxDimensionY)
+    .attr('viewBox', '0 0 ' + maxDimensionX + ' ' + maxDimensionY);
+svg.append("defs")
+   .append("svg:pattern")
+   .attr("id", "bgtile")
+   .append("image")
+   .attr("xlink:href", "/htmls/bgtile.png");
+
+var posX = 0; //maxDimensionX / 2;
+var posY = 0; //maxDimensionY / 2;
+var markedData = [];
+
+// draw a svg grid of rectangles, black
+for(var i = 0; i<maxDimensionX; i++) {
+  markedData[i] = [];
+  for(j = 0; j<maxDimensionY; j++) {
+    markedData[i][j] = 0;
+    
+    svg.append('rect')
+       .attr('width', 1)
+       .attr('height', 1)
+       .attr('x', i)
+       .attr('y', j)
+       .attr('class', 'x-' + i + '-y-' + j + ' black')
+       .style('fill', 'black')
+       .style('stroke', '#FFF')
+       .style('stroke-width', '0.01px');
+  }
+}
+
+// from seed position
+// select up, down, left, or right
+
+//for(var loop = 0; loop < 3; loop++) {
+while(d3.selectAll('.black').size() > 0) {
+  var randomNumber = Math.floor(Math.random() * 4);
+  var xRange, yRange;
+  // 0 => up, left
+  // 1 => down, right
+  // 2 => up, right
+  // 3 => down, left
+  if(randomNumber == 0 || randomNumber == 3) { // up, left
+    var maxDistanceX = Math.floor(Math.random() * posX);
+    xRange = [parseInt(posX) - maxDistanceX, parseInt(posX)];
+  }
+  if(randomNumber == 1 || randomNumber == 3) {
+    var maxDistanceY = Math.floor(Math.random() * posY);
+    yRange = [parseInt(posY) - maxDistanceY, parseInt(posY)];
+  }
+  if(randomNumber == 1 || randomNumber == 2) { 
+    var maxDistanceX = Math.floor(Math.random() * (maxDimensionX - posX)) + 1;
+    xRange = [parseInt(posX), parseInt(posX) + maxDistanceX];
+  } 
+  if(randomNumber == 0 || randomNumber == 2) {
+    var maxDistanceY = Math.floor(Math.random() * (maxDimensionY - posY)) + 1;
+    yRange = [parseInt(posY), parseInt(posY) + maxDistanceY];
+  }
+
+//console.log(xRange);
+//console.log(yRange);
+  var borderPixels;
+  if(xRange[1] != xRange[0] && yRange[1] != yRange[0]) {
+    var distance = Math.sqrt(xRange[0]*xRange[0] + yRange[0]*yRange[0]); 
+    var scaledTo = parseInt(parseFloat(colors.length)*parseFloat(distance)/Math.sqrt(maxDimensionX*maxDimensionY*2));
+    var color = sortedColors[scaledTo];
+
+    var overlapping = false;
+    for(i = xRange[0]; i < xRange[1]; i++) {
+      for(j = yRange[0]; j < yRange[1]; j++) {
+        if(markedData[i] !== undefined && markedData[i][j] !== undefined && markedData[i][j] == 1) {
+          overlapping = true;
+		}
+      }
+    }
+
+console.log('overlapping!');
+    //if(!overlapping) {
+      for(i = xRange[0] - 1; i < xRange[1] + 1; i++) {
+        for(j = yRange[0] - 1; j < yRange[1] + 1; j++) {
+          if(markedData[i] !== undefined && markedData[i][j] !== undefined && markedData[i][j] != 1) {
+            d3.select('.x-' + i + '-y-' + j).classed('gray', true);
+  		}
+        }
+      }
+  
+      for(i = xRange[0]; i < xRange[1]; i++) {
+        for(j = yRange[0]; j < yRange[1]; j++) {
+          if(markedData[i] !== undefined && markedData[i][j] !== undefined && markedData[i][j] != 1) {
+            d3.select('.x-' + i + '-y-' + j).style('fill', color).attr('class', 'x-' + i + '-y-' + j);
+            markedData[i][j] = 1;
+  		}
+        }
+      }
+      borderPixels = d3.selectAll('.gray');
+
+    svg.append('rect')
+       .attr('width', xRange[1] - xRange[0])
+       .attr('height', yRange[1] - yRange[0])
+       .attr('x', xRange[0])
+       .attr('y', yRange[0])
+       .attr("fill", "url(#bg)")
+       .attr('class', 'blah');
+    if(borderPixels.size() == 0) {
+      borderPixels = d3.selectAll('.black');
+    }
+  } else {
+    borderPixels = d3.selectAll('.black');
+  }
+
+  if(borderPixels.size() != 0) {
+    var randomBorderPixel = Math.floor(Math.random() * borderPixels.size());
+    var picked = d3.select(borderPixels[0][randomBorderPixel]);
+    posX = picked.attr('x');
+    posY = picked.attr('y');
+    d3.selectAll('.gray').classed('gray', false).classed('black', true);
+    console.log('new x and y is: ' + posX + ' ' + posY);
+  }
+}
+
+});
+
+    </script>
+
+    </body>
+</html>

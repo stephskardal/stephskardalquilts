@@ -1,0 +1,12 @@
+a.swatch {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  display: inline-block;
+}
+.post {
+  margin-bottom: 0px;
+}
+#sidebar {
+  padding-top: 10px;
+}

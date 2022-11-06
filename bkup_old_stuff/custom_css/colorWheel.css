@@ -1,0 +1,83 @@
+div#sequence {
+  text-align: center;
+  position: relative;
+}
+div#overlay {
+  display: none;
+  position: absolute;
+  font-size: 11px;
+}
+
+h4.widget-title {
+  margin-bottom: 10px;
+}
+div#limit-to {
+/*  display: flex; */
+  text-align: center;
+}
+span#color-selected {
+  margin-left: 10px;
+}
+
+div#instruction {
+  text-align: center;
+}
+div#limit-to a,
+div#harmony-choice a {
+  display: inline-block;
+  margin: 5px;
+  border: 1px solid #02ceba;
+  padding: 3px 10px;
+  letter-spacing: 1px;
+  background-color: #FFFFFF;
+  border: 1px solid #02ceba;
+  color: #02ceba;
+}
+div#limit-to a:hover,
+div#harmony-choice a:hover {
+  text-decoration: none;
+  background-color: #c6efeb;
+}
+div#limit-to a.selected,
+div#harmony-choice a.selected {
+  color: #FFFFFF;
+  border: 1px solid #02ceba;
+  background-color: #02ceba;
+}
+div#harmony-choice a {
+  display: block;
+}
+div#limit-to a.selected:hover {
+  cursor: default;
+}
+
+div#blacks {
+  margin-top: 30px;
+}
+a.swatch,
+span.swatch {
+  border: 1px solid #D0D0D0;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin: 5px;
+  border-radius: 40px;
+  padding: 7px 20px;
+}
+span.swatch {
+  border-radius: 0px;
+}
+div.post-entry h4 {
+  font-size: 12px;
+  font-style: normal; 
+}
+div.post-entry #sidebar a.swatch {
+  font-size: 11px;
+  padding: 3px 10px;
+}
+
+ul#swatch-detail span.swatch {
+  padding: 2px 10px;
+  margin: 0px;
+  border-radius: 3px;
+}

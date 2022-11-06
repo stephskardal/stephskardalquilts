@@ -1,0 +1,64 @@
+body {
+  margin: 10px;
+  position: relative;
+}
+#header svg {
+  opacity: 0.35;
+  margin-bottom: 10px;
+}
+h1 {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  margin-top: 0px; 
+}
+span.swatch,
+#recent-swatches a {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  display: inline-block;
+}
+#swatch-container {
+  float: right;
+  position: relative;
+  top: 5px;
+}
+#recent-swatches a {
+  border: 1px solid #FFFFFF;
+}
+#recent-swatches a.active {
+  border: 1px solid red;
+}
+.select2-results {
+  width: 250px;
+}
+.select2-results__option {
+  display: inline-block;
+  padding: 0px;
+}
+.tab-content {
+  margin-top: 10px;
+}
+line {
+  stroke: rgb(212, 212, 212);
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+  opacity: 0.5;
+}
+
+#clickdraw,
+#canvas,
+#random,
+#random2,
+#clickdraw-block {
+  width: 100%;
+  height: auto;
+}
+#clickdraw svg,
+#canvas svg,
+#random svg,
+#random2 svg,
+#clickdraw-block svg {
+  width: 100%;
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>d3 | simple square grid</title> 
+  <meta name="author" content="Sundar Singh | eesur.com">
+  
+  <script src="http://www.stephskardalquilts.com/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js" charset="utf-8"></script>
+  <script src="http://d3.geotheory.co.uk/d3-transform.js"></script>
+  <script src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js"></script>
+  <script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
+  <script src="external_assets/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="external_assets/bootstrap.min.css"></script>
+  <script src="external_assets/bootstrap-slider.min.js"></script>
+  <script src="/custom_js/select2.min.js"></script>
+  <script src="external_assets/saveSvg.js"></script>
+  <link rel="stylesheet" href="external_assets/bootstrap-slider.min.css"></script>
+  <link rel="stylesheet" href="external_assets/select2.min.css"></script>
+
+  <script src="konaColors.js?v=4"></script>
+  <script src="quiltPlay.js?v=11"></script>
+  <script src="randomize.js?v=26"></script>
+  <script src="randomize2.js?v=3"></script>
+  <script src="hexCanvas.js?v=5"></script>
+  <link rel="stylesheet" href="quiltPlay.css?v=10" />
+</head>
+
+<section id="header">
+</section>
+<h1>Quilt Play</h1>
+
+<div id="swatch-container">
+  <span id="recent-swatches"></span>
+  <select id="swatches" class="swatches"></select>
+</div>
+<ul class="nav nav-tabs" role="tabList">
+  <li class="active">
+    <a href="#clickdraw-tab" id="clickdraw-tab-link" role="tab" data-toggle="tab" aria-controls="clickdraw-tab" aria-expanded="true">Block Play</a>
+  </li>
+  <li>
+    <a href="#canvas-tab" id="canvas-tab-link" role="tab" data-toggle="tab" aria-controls="canvas-tab" aria-expanded="true">Canvas</a>
+  </li>
+  <li>
+    <a href="#hexcanvas-tab" id="hexcanvas-tab-link" role="tab" data-toggle="tab" aria-controls="hexcanvas-tab" aria-expanded="true">Hex Canvas</a>
+  </li>
+  <li>
+    <a href="#random-tab" id="random-tab-link" role="tab" data-toggle="tab" aria-controls="random-tab" aria-expanded="true">Random Generator</a>
+  </li>
+  <li>
+    <a href="#random2-tab" id="random2-tab-link" role="tab" data-toggle="tab" aria-controls="random2-tab" aria-expanded="true">Random #2</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade active in" role="tabpanel" id="clickdraw-tab" aria-labelledby="clickdraw-tab">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <form>
+            <p>
+            Block Size (Units):
+            <input id="currentUnits" type="text" data-slider-min="4" data-slider-max="32" data-slider-step="1" data-slider-value="8"/>
+            </p>
+            <a href="#" id="clickdraw-save" class="btn">Save</a>
+            <a href="#" id="clickdraw-copy" class="btn">Copy to Canvas</a>
+          </form>
+          <section id="clickdraw-block"></section>
+          <hr />
+          <p>
+            <input type="checkbox" id="on-point">On Point
+          </p>
+          <p>
+            Rows: 
+            <input id="sliderRows" type="text" data-slider-min="1" data-slider-max="20" data-slider-step="1" data-slider-value="4"/>
+          </p>
+          <p>
+            Cols:
+            <input id="sliderCols" type="text" data-slider-min="1" data-slider-max="20" data-slider-step="1" data-slider-value="4"/>
+          </p>
+          <p>
+            Border:
+            <select id="border"></select>
+            <input id="sliderBorder" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="0"/>
+          </p>
+          <p>
+            Block Layout Options:<br />
+            <input type="radio" name="layout" value="plain" checked /> Plain<br />
+            <input type="radio" name="layout" value="alternate" /> Alternate<br />
+            <input type="radio" name="layout" value="origin" /> Rotate around Origin<br />
+            <input type="radio" name="layout" value="random" /> Random
+          </p>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col-sm-9">
+          <section id="clickdraw"></section>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <div class="tab-pane fade" role="tabpanel" id="canvas-tab" aria-labelledby="canvas-tab">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <input type="radio" name="colortype" value="click" checked /> Color with click<br />
+          <input type="radio" name="colortype" value="hover" /> Color with hover<br />
+          <a href="#" id="canvas-save" class="btn">Save</a>
+        </div>
+        <div class="col-sm-9">
+          <section id="canvas"></section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" role="tabpanel" id="hexcanvas-tab" aria-labelledby="hexcanvas-tab">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <input type="radio" name="hexcolortype" value="click" checked /> Color with click<br />
+          <input type="radio" name="hexcolortype" value="hover" /> Color with hover<br />
+          <p>
+            Border:
+            <select id="hexborder"></select>
+            <input id="sliderHexBorder" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="0"/>
+          </p>
+          <p>
+            Padding
+            <select id="hexpadding"></select>
+            <input id="sliderHexPadding" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0"/>
+          </p>
+          <a href="#" id="hexcanvas-save" class="btn">Save</a>
+        </div>
+        <div class="col-sm-9">
+          <section id="hexcanvas"></section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" role="tabpanel" id="random-tab" aria-labelledby="random-tab">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <a id="random-add" class="glyphicon glyphicon-plus" href="#" title="Add This Color"></a>
+          <section id="piechart"></section>
+          <form>
+            <input id="randomSize" type="text" data-slider-min="4" data-slider-max="32" data-slider-step="1" data-slider-value="12"/>
+            <input type="submit" id="randomize" value="Randomize" class="btn" />
+          </form>
+          <a href="#" id="random-save" class="btn">Save</a>
+        </div>
+        <div class="col-sm-9">
+          <section id="random"></section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" role="tabpanel" id="random2-tab" aria-labelledby="random2-tab">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <a id="random2-add" class="glyphicon glyphicon-plus" href="#" title="Add This Color"></a>
+          <section id="piechart2"></section>
+          <form>
+            <input type="submit" id="randomize2" value="Randomize" class="btn" />
+          </form>
+          <a href="#" id="random2-save" class="btn">Save</a>
+        </div>
+        <div class="col-sm-9">
+          <section id="random2"></section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+</body>
+</html>
