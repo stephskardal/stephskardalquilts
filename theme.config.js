@@ -1,5 +1,4 @@
 export default {
-  titleSuffix: ' – Steph Skardal Quilts',
   logo: (
     <>
       <span className="mr-2 font-extrabold hidden md:inline">Steph Skardal Quilts</span>
@@ -51,10 +50,6 @@ export default {
       <meta name="msapplication-TileImage" content="/favicon-144x144.png" />
     </>
   ),
-  search: true,
-  prevLinks: true,
-  nextLinks: true,
   footer: true,
   footerText: <>MIT {new Date().getFullYear()} © Steph Skardal Quilts.</>,
-  unstable_faviconGlyph: '👋',
 }

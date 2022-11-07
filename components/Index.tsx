@@ -3,7 +3,7 @@ import Image from 'next/legacy/image'
 import { Grid, Typography, Box } from '@mui/material'
 import HeroImage from 'components/HeroImage'
 
-function About() {
+export default function Index() {
   return (
     <Box sx={{ display: 'flex', margin: '0px auto' }}>
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '0px' }}>
@@ -78,5 +78,3 @@ function About() {
     </Box>
   )
 }
-
-export default About

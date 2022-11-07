@@ -3,7 +3,7 @@ import Image from 'next/legacy/image'
 import { Grid, Typography, Box } from '@mui/material'
 import TimelineEvents from 'components/TimelineEvents'
 
-function About() {
+export default function About() {
   return (
     <Box sx={{ display: 'flex', margin: '0px auto' }}>
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '0px' }}>
@@ -112,5 +112,3 @@ var timelineData = [
     height: 431
   }
 ]
-
-export default About

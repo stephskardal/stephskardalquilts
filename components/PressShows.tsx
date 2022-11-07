@@ -3,7 +3,7 @@ import { Typography, Box } from '@mui/material'
 import TimelineEvents from 'components/TimelineEvents'
 import Image from 'next/legacy/image'
 
-function PressShows() {
+export default function PressShows() {
   return (
     <Box sx={{ display: 'flex' }}>
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '0px' }}>
@@ -251,5 +251,3 @@ var timelineData = [
 // TODO: Fresh Quilting
 // TODO: MQG Covid webinars
 // TODO: Make Modern
-
-export default PressShows

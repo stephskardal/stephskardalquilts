@@ -2,7 +2,7 @@ import * as React from 'react'
 import Image from 'next/legacy/image'
 import { Divider, Typography, Grid, Box } from '@mui/material'
 
-function BookMe() {
+export default function BookMe() {
   return (
     <Box sx={{ display: 'flex' }} id="main-content">
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '0px' }}>
@@ -51,5 +51,3 @@ function BookMe() {
     </Box>
   )
 }
-
-export default BookMe
