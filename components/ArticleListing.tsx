@@ -10,7 +10,7 @@ export interface ArticleListingProps {
 
 function ArticleListing(props: ArticleListingProps) {
   return (
-    <Box sx={{ m: '0px 3%' }}>
+    <Box>
       <Typography
         sx={{
           textAlign: 'center',

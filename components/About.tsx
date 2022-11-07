@@ -6,7 +6,7 @@ import TimelineEvents from 'components/TimelineEvents'
 export default function About() {
   return (
     <Box sx={{ display: 'flex', margin: '0px auto' }}>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '0px' }}>
+      <Box sx={{ flexGrow: 1, marginTop: '0px' }}>
         <Grid container spacing={3}>
           <Grid item sm={5} xs={12}>
             <Image

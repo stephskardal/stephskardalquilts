@@ -69,19 +69,21 @@ export default function MobileNav() {
                 display: { xs: 'block', sm: 'block', md: 'none' },
                 textAlign: 'center',
                 mt: '20px',
+                mb: '15px',
                 background: '#f2d337',
                 padding: '10px'
               }}
             >
               Gallery Links
             </Box>
-            {[2021, 2020, 2019, 2018, 2017, 2016].map((year) => {
+            {[2022, 2021, 2020, 2019, 2018, 2017, 2016].map((year) => {
               return (
                 <Button
                   key={year}
                   sx={{
                     textDecoration: 'none',
-                    display: { xs: 'block', sm: 'none', color: '#000' }
+                    display: { xs: 'block', sm: 'none', color: '#000' },
+                    fontSize: '12px'
                   }}
                   href={`/gallery/${year}`}
                 >

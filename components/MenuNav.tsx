@@ -20,8 +20,6 @@ export default function MenuNav() {
         onClick={handleClick}
         sx={{
           fontSize: '12px',
-          position: 'relative',
-          top: '1px',
           mr: '20px',
           display: {
             md: 'inline-block',

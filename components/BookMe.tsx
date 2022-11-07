@@ -4,8 +4,8 @@ import { Divider, Typography, Grid, Box } from '@mui/material'
 
 export default function BookMe() {
   return (
-    <Box sx={{ display: 'flex' }} id="main-content">
-      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '0px' }}>
+    <Box sx={{ margin: '0px', display: 'flex' }}>
+      <Box sx={{ flexGrow: 1, mt: '0px' }}>
         <Image
           src="/logo.png"
           alt="Steph Skardal Quilts"
@@ -14,14 +14,11 @@ export default function BookMe() {
         />
         <Typography
           component="h1"
-          sx={{ textAlign: 'center', fontSize: '30px', margin: '20px 0px' }}
+          sx={{ textAlign: 'center', fontSize: '30px', m: '20px 0px' }}
         >
           Book Me in 2023!
         </Typography>
-        <Typography
-          align="left"
-          sx={{ marginTop: '30px', marginBottom: '10px' }}
-        >
+        <Typography align="left" sx={{ mt: '30px', mb: '10px' }}>
           I offer the following lectures:
         </Typography>
         <Grid container spacing={2}>

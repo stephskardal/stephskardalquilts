@@ -97,7 +97,7 @@ article,
   article,
   #main-content {
     max-width: auto;
-    margin: 50px;
+    margin: 30px;
   }
 }
 
@@ -129,7 +129,6 @@ header #footer p {
 #mobile-nav a {
   display: block;
   text-align: center;
-  margin: 10px;
 }
 
 
