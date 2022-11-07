@@ -13,6 +13,7 @@ export default function Index() {
             alt="Steph Skardal Quilts"
             width={714}
             height={200}
+            priority
           />
         </Box>
         <Grid container spacing={2}>
