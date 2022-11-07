@@ -8,6 +8,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react'
 import createEmotionCache from 'components/createEmotionCache'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from 'styles/theme'
+import { Analytics } from '@vercel/analytics/react'
 
 import { AppBar } from 'functions/drawer_components'
 import { Box } from '@mui/material'
@@ -46,6 +47,7 @@ export default function Nextra({
           sx={{ margin: '100px auto', maxWidth: '1000px' }}
         >
           <Component {...pageProps} />
+          <Analytics />
         </Box>
         <AppBar
           position="relative"
