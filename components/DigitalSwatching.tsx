@@ -86,6 +86,65 @@ export default function DigitalSwatching() {
 
   return (
     <Grid container spacing="4">
+      <Grid item md={4} xs={12}>
+        <Box sx={{ textAlign: 'center' }}>
+          <Typography component="h3">Instructions</Typography>
+          <Typography>
+            Click on one of the color dots to create a draggable swatch in the
+            white space. Drag and drop the swatches around. Click Reset to clear
+            your palette. Toggle various fabric lines to hide or show them.
+          </Typography>
+          <Button
+            variant="outlined"
+            onClick={resetSwatches}
+            sx={{ mb: '20px', mt: '15px' }}
+          >
+            Reset
+          </Button>
+          {false && <Button variant="outlined">Export</Button>}
+          {false && <Button variant="outlined">Random Pull</Button>}
+          {false && (
+            <>
+              <Typography>Sort By</Typography>
+              {['Hue', 'Saturation', 'Value', 'Luma', 'Chroma'].map(
+                (type: string) => {
+                  return (
+                    <Button
+                      variant="contained"
+                      sx={{ mr: '5px' }}
+                      value={type}
+                      onClick={changeType}
+                      disabled={sortType == type}
+                    >
+                      {type}
+                    </Button>
+                  )
+                }
+              )}
+              <Divider />
+            </>
+          )}
+          <Divider />
+
+          <Typography component="h3" sx={{ mt: '10px', mb: '10px' }}>
+            Fabric Lines
+          </Typography>
+          {Object.keys(fabricSwatches).map((swatchKey) => {
+            return (
+              <Button
+                onClick={changeLine}
+                value={swatchKey}
+                sx={{ m: '0px 0px 5px 5px' }}
+                variant={
+                  selectedLines.includes(swatchKey) ? 'contained' : 'outlined'
+                }
+              >
+                {swatchKey}
+              </Button>
+            )
+          })}
+        </Box>
+      </Grid>
       <Grid item md={8} xs={12} id="draggingSection">
         <Box sx={{ width: '100%', height: '400px' }} id="swatch-bounds">
           {draggableSwatches.map((swatch) => {
@@ -139,65 +198,6 @@ export default function DigitalSwatching() {
                 }}
                 onClick={updateReplica}
               ></IconButton>
-            )
-          })}
-        </Box>
-      </Grid>
-      <Grid item md={4} xs={12}>
-        <Box sx={{ textAlign: 'center' }}>
-          <Typography component="h3">Instructions</Typography>
-          <Typography>
-            Drag and drop (or double click) the swatches below to the white
-            space above to select them. Drag and drop (or double click) the
-            selected swatches to remove them.
-          </Typography>
-          <Button
-            variant="outlined"
-            onClick={resetSwatches}
-            sx={{ mb: '20px', mt: '15px' }}
-          >
-            Reset
-          </Button>
-          {false && <Button variant="outlined">Export</Button>}
-          {false && <Button variant="outlined">Random Pull</Button>}
-          {false && (
-            <>
-              <Typography>Sort By</Typography>
-              {['Hue', 'Saturation', 'Value', 'Luma', 'Chroma'].map(
-                (type: string) => {
-                  return (
-                    <Button
-                      variant="contained"
-                      sx={{ mr: '5px' }}
-                      value={type}
-                      onClick={changeType}
-                      disabled={sortType == type}
-                    >
-                      {type}
-                    </Button>
-                  )
-                }
-              )}
-              <Divider />
-            </>
-          )}
-          <Divider />
-
-          <Typography component="h3" sx={{ mt: '10px', mb: '10px' }}>
-            Fabric Lines
-          </Typography>
-          {Object.keys(fabricSwatches).map((swatchKey) => {
-            return (
-              <Button
-                onClick={changeLine}
-                value={swatchKey}
-                sx={{ m: '0px 0px 5px 5px' }}
-                variant={
-                  selectedLines.includes(swatchKey) ? 'contained' : 'outlined'
-                }
-              >
-                {swatchKey}
-              </Button>
             )
           })}
         </Box>
