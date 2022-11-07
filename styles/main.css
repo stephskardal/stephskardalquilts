@@ -168,3 +168,8 @@ div.detail div.match-detail {
   right: 7px;
   font-weight: normal;
 }
+
+/* Quilt Gallery */
+.fullscreen .react-images__positioner {
+  z-index: 1300;
+}

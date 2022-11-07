@@ -9,6 +9,14 @@ import { Typography, Box } from '@mui/material'
 //  year: number;
 //}
 
+const customStyles = {
+  header: (base, state) => ({
+    ...base,
+    // color: state.isFullscreen ? 'red' : 'blue',
+    padding: 5
+  })
+}
+
 export default function QuiltGallery(props) {
   const [currentImage, setCurrentImage] = useState(0)
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
@@ -52,6 +60,7 @@ export default function QuiltGallery(props) {
             {viewerIsOpen ? (
               <Modal onClose={closeLightbox}>
                 <Carousel
+                  styles={customStyles}
                   currentIndex={currentImage}
                   views={filteredImages.map((x) => ({
                     ...x,
