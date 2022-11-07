@@ -7,8 +7,8 @@ function About() {
   return (
     <Box sx={{ display: 'flex', margin: '0px auto' }}>
       <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '0px' }}>
-        <Grid container spacing={10}>
-          <Grid item md={4} xs={12}>
+        <Grid container spacing={3}>
+          <Grid item sm={5} xs={12}>
             <Image
               src="/steph.jpg"
               width="500"
@@ -16,7 +16,7 @@ function About() {
               alt="Steph Skardal"
             />
           </Grid>
-          <Grid item md={8} xs={12}>
+          <Grid item sm={7} xs={12}>
             <Box sx={{ marginBottom: '40px' }}>
               <Image
                 src="/logo.png"
@@ -46,7 +46,9 @@ function About() {
             </Typography>
           </Grid>
         </Grid>
-        <TimelineEvents timeline={timelineData} />
+        <Box sx={{ mt: '20px' }}>
+          <TimelineEvents timeline={timelineData} />
+        </Box>
       </Box>
     </Box>
   )

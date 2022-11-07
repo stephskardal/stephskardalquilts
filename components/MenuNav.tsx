@@ -19,7 +19,7 @@ export default function MenuNav() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         sx={{
-          fontSize: '14.5px',
+          fontSize: '12px',
           position: 'relative',
           top: '1px',
           mr: '20px',
@@ -51,31 +51,56 @@ export default function MenuNav() {
       </Menu>
       <Button
         href="/blog"
-        sx={{ mr: '7px', textDecoration: 'none', color: '#000' }}
+        sx={{
+          mr: '7px',
+          textDecoration: 'none',
+          color: '#000',
+          fontSize: '12px'
+        }}
       >
         BLOG
       </Button>
       <Button
         href="/tools"
-        sx={{ mr: '7px', textDecoration: 'none', color: '#000' }}
+        sx={{
+          mr: '7px',
+          textDecoration: 'none',
+          color: '#000',
+          fontSize: '12px'
+        }}
       >
         TOOLS
       </Button>
       <Button
         href="/press-shows"
-        sx={{ mr: '7px', textDecoration: 'none', color: '#000' }}
+        sx={{
+          mr: '7px',
+          textDecoration: 'none',
+          color: '#000',
+          fontSize: '12px'
+        }}
       >
         PRESS & SHOWS
       </Button>
       <Button
         href="/about"
-        sx={{ mr: '7px', textDecoration: 'none', color: '#000' }}
+        sx={{
+          mr: '7px',
+          textDecoration: 'none',
+          color: '#000',
+          fontSize: '12px'
+        }}
       >
         ABOUT ME
       </Button>
       <Button
         href="/book-me"
-        sx={{ mr: '7px', textDecoration: 'none', color: '#000' }}
+        sx={{
+          mr: '7px',
+          textDecoration: 'none',
+          color: '#000',
+          fontSize: '12px'
+        }}
       >
         BOOK ME
       </Button>

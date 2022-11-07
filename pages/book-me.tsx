@@ -1,8 +1,6 @@
 import * as React from 'react'
 import Image from 'next/legacy/image'
-import { useTheme } from '@mui/material/styles'
-import { useRouter } from 'next/router'
-import { Typography, Box } from '@mui/material'
+import { Divider, Typography, Grid, Box } from '@mui/material'
 
 function BookMe() {
   return (
@@ -26,14 +24,26 @@ function BookMe() {
         >
           I offer the following lectures:
         </Typography>
-        <Typography align="left" sx={{ fontStyle: 'italic' }}>
-          Trunk Show: My Quilting Journey through the Years
-        </Typography>
-        <Typography align="left" sx={{ fontStyle: 'italic' }}>
-          On Creativity: Myapproach to pushing the boundaries in creativity,
-          with discussion on extrinsic and intrinsic motivation.
-        </Typography>
-        <Typography align="left" sx={{ marginTop: '30px' }}>
+        <Grid container spacing={2}>
+          <Grid item sm={6} xs={12}>
+            <Image src="/images/trunkshow.jpg" width="960" height="540" />
+            <Typography component="h3">
+              Trunk Show: My Quilting Journey through the Years
+            </Typography>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Image
+              src="/images/creativity_reboot.jpg"
+              width="960"
+              height="540"
+            />
+            <Typography component="h3">
+              On Creativity: Pushing Your Creative Boundaries
+            </Typography>
+          </Grid>
+        </Grid>
+        <Divider sx={{ m: '30px 0px' }} />
+        <Typography align="left" sx={{ marginTop: '10px' }}>
           Please feel free to contact me at stephskardal@gmail.com for rates and
           availability.
         </Typography>

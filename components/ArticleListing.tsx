@@ -14,7 +14,7 @@ function ArticleListing(props: ArticleListingProps) {
       <Typography
         sx={{
           textAlign: 'center',
-          fontSize: '50px',
+          fontSize: '40px',
           fontFamily: 'Inter Var',
           mb: '30px'
         }}
