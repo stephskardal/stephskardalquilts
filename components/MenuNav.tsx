@@ -41,7 +41,7 @@ export default function MenuNav() {
           'aria-labelledby': 'basic-button'
         }}
       >
-        {[2021, 2020, 2019, 2018, 2017, 2016].map((year) => {
+        {[2022, 2021, 2020, 2019, 2018, 2017, 2016].map((year) => {
           return (
             <MenuItem onClick={handleClose} key={year}>
               <Button href={`/gallery/${year}`}>{year}</Button>
