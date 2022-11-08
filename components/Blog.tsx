@@ -10,6 +10,9 @@ export default Blog
 
 let blogPosts = [
   {
+    title: 'Website Update: November 2022'
+  },
+  {
     title: 'Aurifil Artisan Challenge: April 2022'
   },
   {

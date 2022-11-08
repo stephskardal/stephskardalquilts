@@ -1,0 +1,99 @@
+---
+title: 'Website Update: 2022'
+date: '2022-11-07'
+---
+
+import BlogImage from 'components/BlogImage'
+import GridDisplay from 'components/GridDisplay'
+import { Link, Box, Typography } from '@mui/material'
+
+# Website Update: 2022
+
+After 5 years of running my quilt website on [WordPress](https://wordpress.com/), I decided to reboot my website in a [React](https://reactjs.org/) + [NextJS](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/) custom app .
+
+<Box sx={{ float: 'left', marginRight: '15px' }}>
+  <BlogImage src="modernquilts-225x300.jpg" alt="" width="200" height="260" />
+</Box>
+
+Before I go into why, let's take a brief trip down memory lane: I created my website in 2017 in preparation for [a book release](/blog/modern-quilts-designs-of-the-new-century),
+having been requested a website URL for a link share.
+At the time I had a photo website as I was still working part time as a photographer on weekends, as I was gradually ramping up my interest in quilting.
+WordPress appealed to me because I could drop it onto the same server as my photo site, install a theme, and immediately start publishing.
+
+Since late 2017 WordPress has worked well enough, however since that time I've built out a handful of custom web [quilty tools](/tools) on my website,
+which were occasionally a bit of a headache to get working within WordPress. I also hosted WordPress on my own server and maintained that server,
+which came with it's own fun challenges and inconveniences!
+
+This year, I started seeing more issues with my WordPress setup and have not prioritized troubleshooting those issues. And while long-form blogging is still
+popular in some ways, most of my "quilting community" and interaction has shifted only.
+Without taking advantage of comments on WordPress, my website became
+a fairly simple static website where I hosted my quilt galleries, tools, and occasionally blogged. I started thinking through alternative options
+and ultimately settled on wanting to reboot the website. And it just so happens that my day job (as a software engineer) allowed me to build up
+some skills in a direction that would help support this website reboot.
+
+I finally put this plan into action in the last few weeks and fully migrated my WordPress site over to a static built site.
+I've also shared [the code](https://github.com/stephskardal/stephskardalquilts) for any of my fellow curious quilters
+who want to see "actual code". I've ditched comments, search, and WordPress plugins for the sake of minimal hosting concerns and more control
+over how I share here!
+
+You can still find me [on Instagram](https://instagram.com/stephskardal) and chat with me there. And all of my quilty tools remain
+intact and updated - they might look a little
+different here and there, but they are still the same tools in essence!
+
+<GridDisplay
+  child1={
+    <Box>
+      <Typography component="h3">
+        <Link
+          sx={{ textDecoration: 'none;' }}
+          href="/tools/solids-visualization-hue-x-saturation"
+        >
+          Color Visualization Tool
+        </Link>
+      </Typography>
+      <BlogImage src="colorwheel.jpg" width="1200" height="693" />
+    </Box>
+  }
+  child2={
+    <Box>
+      <Typography component="h3">
+        <Link
+          sx={{ textDecoration: 'none' }}
+          href="/tools/digital-swatchy-tool"
+        >
+          Digital Swatches
+        </Link>
+      </Typography>
+      <BlogImage src="digital_swatches.jpg" width="1200" height="693" />
+    </Box>
+  }
+/>
+<Box sx={{ mt: '20px' }}></Box>
+<GridDisplay
+  child1={
+    <Box>
+      <Typography component="h3">
+        <Link
+          sx={{ textDecoration: 'none' }}
+          href="/tools/solids-library-now-on-github"
+        >
+          Opened Source Solids Library
+        </Link>
+      </Typography>
+      <BlogImage src="randomizetriangles.jpg" width="1200" height="693" />
+    </Box>
+  }
+  child2={
+    <Box>
+      <Typography component="h3">
+        <Link
+          sx={{ textDecoration: 'none' }}
+          href="/tools/solids-visualization-hue-x-saturation"
+        >
+          Color Visualization Tool
+        </Link>
+      </Typography>
+      <BlogImage src="swatches.jpg" width="1200" height="693" />
+    </Box>
+  }
+/>
