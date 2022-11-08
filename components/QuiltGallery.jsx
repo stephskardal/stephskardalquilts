@@ -48,7 +48,7 @@ export default function QuiltGallery(props) {
       {props.showTitle && (
         <Typography
           component="h1"
-          sx={{ fontSize: '50px', paddingBottom: '20px' }}
+          sx={{ fontSize: '40px', paddingBottom: '20px' }}
         >
           Gallery: {props.year}
         </Typography>

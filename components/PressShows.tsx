@@ -6,7 +6,7 @@ import Image from 'next/legacy/image'
 export default function PressShows() {
   return (
     <Box sx={{ display: 'flex' }}>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '0px' }}>
+      <Box component="main" sx={{ flexGrow: 1, marginTop: '0px' }}>
         <Box sx={{ marginBottom: '40px' }}>
           <Image
             src="/logo.png"
