@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Typography, Divider, Grid, Box, Button } from '@mui/material'
+import { Typography, Grid, Box, Divider, Button } from '@mui/material'
 
 import ColorThief from '../functions/color-thief.js'
 import chroma from 'chroma-js'
@@ -7,6 +7,8 @@ import chroma from 'chroma-js'
 import { fabricSwatches } from '../public/custom_js/fabricSwatches'
 
 export default function ColorPalette() {
+  const [swatchResultWidth, setSwatchResultWidth] =
+    React.useState<number>(undefined)
   const [matchType, setMatchType] = React.useState<string>('both')
   const [localImage, setLocalImage] = React.useState(undefined)
   const [loadedImage, setLoadedImage] = React.useState(undefined)
@@ -30,15 +32,14 @@ export default function ColorPalette() {
       textColor = '#FFF'
     }
 
-    console.log(swatch)
-
     if (matchType == 'both') {
       return (
         <Box
+          key={swatch.color}
           className="swatch"
           sx={{
-            width: '150px',
-            height: '150px',
+            width: `${swatchResultWidth}px`,
+            height: `${swatchResultWidth}px`,
             position: 'relative',
             display: 'block',
             float: 'left',
@@ -52,8 +53,8 @@ export default function ColorPalette() {
             sx={{
               height: '0px',
               width: '0px',
-              borderRight: '150px solid transparent',
-              borderTop: `150px solid ${swatch.color}`,
+              borderRight: `${swatchResultWidth}px solid transparent`,
+              borderTop: `${swatchResultWidth}px solid ${swatch.color}`,
               position: 'absolute'
             }}
           ></Box>
@@ -61,9 +62,9 @@ export default function ColorPalette() {
             component="div"
             className="match"
             sx={{
-              borderBottom: `150px solid ${swatch.colorMatch}`,
+              borderBottom: `${swatchResultWidth}px solid ${swatch.colorMatch}`,
               position: 'absolute',
-              borderLeft: '150px solid transparent',
+              borderLeft: `${swatchResultWidth}px solid transparent`,
               height: '0px',
               width: '0px'
             }}
@@ -73,8 +74,8 @@ export default function ColorPalette() {
             sx={{
               position: 'absolute',
               fontSize: '12px',
-              width: '150px',
-              height: '150px'
+              width: `${swatchResultWidth}px`,
+              height: `${swatchResultWidth}px`
             }}
           >
             <Box className="palette-detail" sx={{ color: textColor }}>
@@ -92,8 +93,8 @@ export default function ColorPalette() {
         <Box
           className="swatch"
           sx={{
-            width: '150px',
-            height: '150px',
+            width: `${swatchResultWidth}px`,
+            height: `${swatchResultWidth}px`,
             position: 'relative',
             display: 'block',
             float: 'left',
@@ -107,8 +108,8 @@ export default function ColorPalette() {
             sx={{
               position: 'absolute',
               fontSize: '12px',
-              width: '150px',
-              height: '150px'
+              width: `${swatchResultWidth}px`,
+              height: `${swatchResultWidth}px`
             }}
           >
             <Box className="palette-detail" sx={{ color: textColor }}>
@@ -123,8 +124,8 @@ export default function ColorPalette() {
         <Box
           className="swatch"
           sx={{
-            width: '150px',
-            height: '150px',
+            width: `${swatchResultWidth}px`,
+            height: `${swatchResultWidth}px`,
             position: 'relative',
             display: 'block',
             float: 'left',
@@ -138,8 +139,8 @@ export default function ColorPalette() {
             sx={{
               position: 'absolute',
               fontSize: '12px',
-              width: '150px',
-              height: '150px'
+              width: `${swatchResultWidth}px`,
+              height: `${swatchResultWidth}px`
             }}
           >
             <Box className="match-detail" sx={{ color: textColor }}>
@@ -152,17 +153,28 @@ export default function ColorPalette() {
   }
 
   React.useEffect(() => {
+    if (swatchResultWidth === undefined) {
+      let width = document.getElementById('swatch-result').offsetWidth
+      if (width < 600) {
+        setSwatchResultWidth((width - 45) / 3)
+      } else {
+        setSwatchResultWidth((width - 60) / 4)
+      }
+    }
+  }, [])
+
+  React.useEffect(() => {
     if (localImage !== undefined) {
       let image = URL.createObjectURL(localImage)
       setLoadedImage(image)
       renderPalette(image)
     }
-  }, [localImage])
+  }, [localImage, swatchResultWidth])
 
   const renderPalette = (filename: string) => {
     let palette = {}
     let swatches = []
-    var colorThiefPalette = ColorThief.getPalette(filename, 16)
+    var colorThiefPalette = ColorThief.getPalette(filename, 18)
     colorThiefPalette.then((value) => {
       value.forEach((color, i) => {
         var chromaColor = chroma(color)
@@ -174,11 +186,6 @@ export default function ColorPalette() {
         })
         if (!foundCloseColor) {
           palette[i] = chromaColor
-          var paletteExtraCss = ''
-          if (chromaColor.hsv()[2] < 0.5) {
-            paletteExtraCss = 'color:#FFF;'
-          }
-
           var closestMatch = Object.keys(
             fabricSwatches[selectedLine].swatches
           )[0]
@@ -195,15 +202,6 @@ export default function ColorPalette() {
               }
             }
           )
-          var matchExtraCss = ''
-          if (
-            chroma(
-              fabricSwatches[selectedLine].swatches[closestMatch]
-            ).hsv()[2] < 0.5
-          ) {
-            matchExtraCss = 'color:#FFF;'
-          }
-
           swatches.push({
             color: chromaColor.hex(),
             saturation: chromaColor.hsv()[1].toFixed(2),
@@ -223,46 +221,15 @@ export default function ColorPalette() {
 
   return (
     <Grid container spacing="2">
-      <Grid item md={8} xs={12} sx={{ m: '0px auto' }}>
-        {colorSwatches.map((swatch) => renderSwatch(swatch))}
-      </Grid>
       <Grid item md={2} xs={12} sx={{ textAlign: 'center' }}>
-        <Typography component="h3">Match Type</Typography>
-        <Button
-          size="small"
-          onClick={changeMatch}
-          value="both"
-          sx={{ mb: '5px', mr: '5px' }}
-          variant={matchType == 'both' ? 'contained' : 'outlined'}
-        >
-          Both
-        </Button>
-        <Button
-          onClick={changeMatch}
-          value="palette"
-          variant={matchType == 'palette' ? 'contained' : 'outlined'}
-          size="small"
-          sx={{ mb: '5px', mr: '5px' }}
-        >
-          Palette Match
-        </Button>
-        <Button
-          size="small"
-          variant={matchType == 'swatch' ? 'contained' : 'outlined'}
-          onClick={changeMatch}
-          sx={{ mb: '20px', mr: '5px' }}
-          value="swatch"
-        >
-          Swatch Match
-        </Button>
-        <Divider />
+        <Typography component="h3">Upload Image</Typography>
         <Button
           variant="contained"
           component="label"
           size="small"
-          sx={{ mb: '5px', mr: '5px', mt: '20px' }}
+          sx={{ mr: '5px', mb: '5px' }}
         >
-          Upload File
+          Select File
           <input onChange={fileChanged} type="file" accept="image/*" hidden />
         </Button>
         {loadedImage && (
@@ -270,7 +237,7 @@ export default function ColorPalette() {
             sx={{
               position: 'relative',
               height: 'auto',
-              width: '150px',
+              width: '100%',
               m: '0px auto'
             }}
           >
@@ -281,22 +248,74 @@ export default function ColorPalette() {
             />
           </Box>
         )}
+        <Divider
+          sx={{
+            mt: '20px',
+            mb: '20px'
+          }}
+        />
+        <Typography component="h3">Match Type</Typography>
+        <Button
+          size="small"
+          onClick={changeMatch}
+          value="both"
+          sx={{ mr: '5px', mb: '5px' }}
+          variant={matchType == 'both' ? 'contained' : 'outlined'}
+        >
+          Both
+        </Button>
+        <Button
+          onClick={changeMatch}
+          value="palette"
+          variant={matchType == 'palette' ? 'contained' : 'outlined'}
+          size="small"
+          sx={{ mr: '5px', mb: '5px' }}
+        >
+          Palette Match
+        </Button>
+        <Button
+          size="small"
+          variant={matchType == 'swatch' ? 'contained' : 'outlined'}
+          onClick={changeMatch}
+          sx={{ mr: '5px' }}
+          value="swatch"
+        >
+          Swatch Match
+        </Button>
       </Grid>
-      <Grid item md={2} xs={12}>
+      <Grid item md={2} xs={12} sx={{ pr: '10px', pl: '10px' }}>
+        <Divider
+          sx={{
+            mt: '20px',
+            mb: '20px',
+            display: { md: 'none', sm: 'block' }
+          }}
+        />
         <Typography component="h3">Fabric Line</Typography>
         {Object.keys(fabricSwatches).map((swatchKey) => {
           return (
             <Button
+              key={swatchKey}
               size="small"
               onClick={changeLine}
               value={swatchKey}
               sx={{ mb: '5px', mr: '5px' }}
               variant={selectedLine == swatchKey ? 'contained' : 'outlined'}
             >
-              {swatchKey}
+              {fabricSwatches[swatchKey].label}
             </Button>
           )
         })}
+      </Grid>
+      <Grid item md={8} xs={12} sx={{ m: '0px auto' }} id="swatch-result">
+        <Divider
+          sx={{
+            mt: '20px',
+            mb: '20px',
+            display: { md: 'none', sm: 'block' }
+          }}
+        />
+        {colorSwatches.map((swatch) => renderSwatch(swatch))}
       </Grid>
     </Grid>
   )

@@ -20,8 +20,7 @@ export default function DigitalSwatching() {
   }
 
   const [selectedLines, setSelectedLines] = React.useState<string[]>(
-    //Object.keys(fabricSwatches)
-    ['aurifilThread']
+    Object.keys(fabricSwatches)
   )
   const [draggableSwatches, setDraggableSwatches] = React.useState<any[]>([])
 
@@ -42,9 +41,7 @@ export default function DigitalSwatching() {
   }
 
   const closeItem = (el) => {
-    el.preventDefault()
     let elId = el.target.id.replace(/^close-/, '')
-    console.log(elId)
 
     let updatedDraggableSwatches = []
     document.getElementById(elId).classList.remove('selected')
@@ -55,6 +52,7 @@ export default function DigitalSwatching() {
       updatedDraggableSwatches.push(r)
     })
     setDraggableSwatches(updatedDraggableSwatches)
+    return
   }
 
   const updateReplica = (el) => {
