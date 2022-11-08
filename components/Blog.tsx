@@ -22,7 +22,7 @@ let blogPosts = [
   { title: 'Aurifil Artisan Challenge: December 2021' },
   { title: 'Aurifil Artisan Challenge: November 2021' },
   { title: 'Aurifil Artisan Challenge: April 2021' },
-  { title: 'QuiltCon 2021: Non-Trip Report' },
+  { title: 'QuiltCon 2021: Non-Trip Report', height: 400, width: 400 },
   { title: 'Aurifil Artisan Challenge: February 2021' },
   { title: 'Aurifil Artisan Challenge: November 2020' },
   { title: 'Aurifil Artisan Challenge: September 2020' },
