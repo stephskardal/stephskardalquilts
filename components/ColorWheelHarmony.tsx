@@ -1,8 +1,8 @@
 import * as React from 'react'
 import * as d3 from 'd3'
 import { Grid, Button, Typography, Box, Divider } from '@mui/material'
-import { fabricSwatches } from '../public/custom_js/fabricSwatches'
-import { colorColorSorting } from '../functions/colorSortingFunc'
+import { fabricSwatches } from 'public/custom_js/fabricSwatches'
+import { colorColorSorting } from 'functions/colorSortingFunc'
 
 let elId = '#color-wheel-harmony'
 

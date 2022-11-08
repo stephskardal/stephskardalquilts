@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Divider, Tooltip, Box, Grid, Button, Typography } from '@mui/material'
 import * as d3 from 'd3'
-import { fabricSwatches } from '../public/custom_js/fabricSwatches'
-import { colorColorSorting } from '../functions/colorSortingFunc'
+import { fabricSwatches } from 'public/custom_js/fabricSwatches'
+import { colorColorSorting } from 'functions/colorSortingFunc'
 
 export default function RandomizeTriangles() {
   const gridRef = React.useRef()
