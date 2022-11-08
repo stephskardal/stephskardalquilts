@@ -5,7 +5,8 @@ import {
   Divider,
   Box,
   IconButton,
-  Button
+  Button,
+  Link
 } from '@mui/material'
 import { fabricSwatches } from '../public/custom_js/fabricSwatches'
 import Draggable from 'react-draggable'
@@ -19,7 +20,8 @@ export default function DigitalSwatching() {
   }
 
   const [selectedLines, setSelectedLines] = React.useState<string[]>(
-    Object.keys(fabricSwatches)
+    //Object.keys(fabricSwatches)
+    ['aurifilThread']
   )
   const [draggableSwatches, setDraggableSwatches] = React.useState<any[]>([])
 
@@ -37,6 +39,22 @@ export default function DigitalSwatching() {
     } else {
       setSelectedLines(selectedLines.filter((p) => p != el.target.value))
     }
+  }
+
+  const closeItem = (el) => {
+    el.preventDefault()
+    let elId = el.target.id.replace(/^close-/, '')
+    console.log(elId)
+
+    let updatedDraggableSwatches = []
+    document.getElementById(elId).classList.remove('selected')
+    draggableSwatches.forEach((r) => {
+      if (r.name == elId) {
+        r.visible = false
+      }
+      updatedDraggableSwatches.push(r)
+    })
+    setDraggableSwatches(updatedDraggableSwatches)
   }
 
   const updateReplica = (el) => {
@@ -156,7 +174,6 @@ export default function DigitalSwatching() {
                 <Box
                   sx={{
                     pt: '5px',
-                    pb: '5px',
                     background: '#FFF',
                     minHeight: '100px',
                     display: swatch.visible ? 'block' : 'none'
@@ -173,6 +190,12 @@ export default function DigitalSwatching() {
                   <Typography sx={{ fontSize: '12px' }}>
                     {swatch.name}
                   </Typography>
+                  <Link href="#" onClick={closeItem}>
+                    <CloseIcon
+                      id={`close-${swatch.name}`}
+                      sx={{ fontSize: '14px', color: '#000' }}
+                    />
+                  </Link>
                 </Box>
               </Draggable>
             )
