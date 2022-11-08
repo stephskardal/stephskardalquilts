@@ -41,6 +41,7 @@ export default function DigitalSwatching() {
   }
 
   const closeItem = (el) => {
+    el.preventDefault()
     let elId = el.target.id.replace(/^close-/, '')
 
     let updatedDraggableSwatches = []
@@ -110,13 +111,6 @@ export default function DigitalSwatching() {
             white space. Drag and drop the swatches around. Click Reset to clear
             your palette. Toggle various fabric lines to hide or show them.
           </Typography>
-          <Button
-            variant="outlined"
-            onClick={resetSwatches}
-            sx={{ mb: '20px', mt: '15px' }}
-          >
-            Reset
-          </Button>
           {false && <Button variant="outlined">Export</Button>}
           {false && <Button variant="outlined">Random Pull</Button>}
           {false && (
@@ -140,7 +134,7 @@ export default function DigitalSwatching() {
               <Divider />
             </>
           )}
-          <Divider />
+          <Divider sx={{ mt: '20px' }} />
 
           <Typography component="h3" sx={{ mt: '10px', mb: '10px' }}>
             Fabric Lines
@@ -162,7 +156,30 @@ export default function DigitalSwatching() {
         </Box>
       </Grid>
       <Grid item md={8} xs={12} id="draggingSection">
-        <Box sx={{ width: '100%', height: '400px' }} id="swatch-bounds">
+        <Divider
+          sx={{
+            mt: '20px',
+            mb: '20px',
+            display: { md: 'none', sm: 'block' }
+          }}
+        />
+        <Box
+          sx={{
+            mb: '10px',
+            border: '1px dotted #ddd',
+            width: '100%',
+            height: '400px',
+            position: 'relative'
+          }}
+          id="swatch-bounds"
+        >
+          <Button
+            variant="outlined"
+            onClick={resetSwatches}
+            sx={{ position: 'absolute', right: '0px' }}
+          >
+            Clear
+          </Button>
           {draggableSwatches.map((swatch) => {
             let width =
               document.getElementById('swatch-bounds').offsetWidth - 80
@@ -188,7 +205,11 @@ export default function DigitalSwatching() {
                   <Typography sx={{ fontSize: '12px' }}>
                     {swatch.name}
                   </Typography>
-                  <Link href="#" onClick={closeItem}>
+                  <Link
+                    href="#"
+                    onClick={closeItem}
+                    sx={{ display: { md: 'block', sm: 'none', xs: 'none' } }}
+                  >
                     <CloseIcon
                       id={`close-${swatch.name}`}
                       sx={{ fontSize: '14px', color: '#000' }}

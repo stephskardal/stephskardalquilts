@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as d3 from 'd3'
 import chroma from 'chroma-js'
 import { Box, Button } from '@mui/material'
-import { colorColorSorting } from '../functions/colorSortingFunc'
+import { colorColorSorting } from 'functions/colorSortingFunc'
 
 var fabricSwatches = {
   primaryColors: {

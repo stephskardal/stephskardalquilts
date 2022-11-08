@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Typography, Grid, Box, Divider, Button } from '@mui/material'
 
-import ColorThief from '../functions/color-thief.js'
+import ColorThief from 'functions/color-thief.js'
 import chroma from 'chroma-js'
 
 import { fabricSwatches } from '../public/custom_js/fabricSwatches'

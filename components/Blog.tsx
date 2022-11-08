@@ -1,8 +1,17 @@
+import * as React from 'react'
 import ArticleListing from 'components/ArticleListing'
+import ScrollTop from 'components/ScrollTop'
 
 function Blog() {
   return (
-    <ArticleListing title="On the Blog" articles={blogPosts} urlBase="blog/" />
+    <>
+      <ScrollTop />
+      <ArticleListing
+        title="On the Blog"
+        articles={blogPosts}
+        urlBase="blog/"
+      />
+    </>
   )
 }
 

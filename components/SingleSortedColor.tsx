@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Typography, Tooltip, Box } from '@mui/material'
-import { colorColorSorting } from '../functions/colorSortingFunc'
-import { fabricSwatches } from '../public/custom_js/fabricSwatches'
+import { colorColorSorting } from 'functions/colorSortingFunc'
+import { fabricSwatches } from 'public/custom_js/fabricSwatches'
 
 export interface SingleSortedColorProps {
   swatchKey: string
