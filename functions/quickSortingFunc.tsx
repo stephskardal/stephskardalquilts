@@ -4,7 +4,6 @@ var Color = function Color(hexVal) { //define a Color class for the color object
 
 export const quickColorSorting = {
   sort: function (colors, sortKey) {
-    console.log(colors);
     var sortedColors = [];
     var unsortedColors = [];
     colors.forEach((hex) => {

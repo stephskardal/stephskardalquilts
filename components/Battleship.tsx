@@ -63,6 +63,17 @@ export default function ColorWheelFabricDistribution() {
     battleship()
   }, [sortedColors])
 
+  let getColor = (xRange, yRange, maxX, maxY) => {
+    let distance: number = Math.sqrt(
+      xRange[0] * xRange[0] + yRange[0] * yRange[0]
+    )
+    var scaledTo = Number.parseInt(
+      // @ts-ignore
+      (colors.length * distance) / Math.sqrt(maxX * maxY * 2)
+    )
+    return sortedColors[scaledTo]
+  }
+
   const battleship = () => {
     let maxDimensionX: number = 20
     let maxDimensionY: number = 20
@@ -75,8 +86,6 @@ export default function ColorWheelFabricDistribution() {
       .attr('height', 500) //maxDimensionY)
       .attr('viewBox', '0 0 10 10')
 
-    var posX: number = 0 //maxDimensionX / 2;
-    var posY: number = 0 //maxDimensionY / 2;
     var markedData = []
 
     // draw a svg grid of rectangles, black
@@ -101,11 +110,13 @@ export default function ColorWheelFabricDistribution() {
     // from seed position
     // select up, down, left, or right
 
-    for (let loop = 0; loop < 10; loop++) {
+    var posX: number = 0 //maxDimensionX / 2;
+    var posY: number = 0 //maxDimensionY / 2;
+    for (let loop = 0; loop < 5; loop++) {
       //while (d3.selectAll('.black').size() > 0) {
       var randomNumber = Math.floor(Math.random() * 4)
       if (randomNumber == 0) {
-        // up
+        console.log('direction is up')
         var minY = posY
         while (minY > 1 && markedData[posX][minY] == 0) {
           minY -= 1
@@ -114,7 +125,7 @@ export default function ColorWheelFabricDistribution() {
         var xRange = [posX, posX + 1]
         var yRange = [posY - maxDistance, posY]
       } else if (randomNumber == 1) {
-        // down
+        console.log('direction is down')
         var maxY = posY
         while (maxY < maxDimensionY && markedData[posX][maxY] == 0) {
           maxY = maxY + 1
@@ -123,7 +134,7 @@ export default function ColorWheelFabricDistribution() {
         var xRange = [posX, posX + 1]
         var yRange = [posY, posY + maxDistance]
       } else if (randomNumber == 2) {
-        // left
+        console.log('direction is left')
         var minX = posX
         while (minX > 1 && markedData[minX][posY] == 0) {
           minX = minX - 1
@@ -132,9 +143,13 @@ export default function ColorWheelFabricDistribution() {
         var xRange = [posX - maxDistance, posX + 1]
         var yRange = [posY, posY + 1]
       } else if (randomNumber == 3) {
-        // right
+        console.log('direction is right')
         var maxX = posX
+        console.log('max x: ' + maxX)
+        console.log('pos y: ' + posY)
         while (maxX < maxDimensionX && markedData[maxX][posY] == 0) {
+          console.log('max x: ' + maxX)
+          console.log('pos y: ' + posY)
           maxX = maxX + 1
         }
         let maxDistance = maxX - posX //Math.floor(Math.random() * (maxX - posX)) + 1;
@@ -142,20 +157,10 @@ export default function ColorWheelFabricDistribution() {
         var yRange = [posY, posY + 1]
       }
 
-      // console.log(xRange)
-      //console.log(yRange)
-
       let borderPixels
       if (xRange[1] != xRange[0] && yRange[1] != yRange[0]) {
-        let distance: number = Math.sqrt(
-          xRange[0] * xRange[0] + yRange[0] * yRange[0]
-        )
-        var scaledTo = Number.parseInt(
-          // @ts-ignore
-          (colors.length * distance) /
-            Math.sqrt(maxDimensionX * maxDimensionY * 2)
-        )
-        var color = sortedColors[scaledTo]
+        // Retrieve color scaled
+        let color = getColor(xRange, yRange, maxDimensionX, maxDimensionY)
 
         for (let i = xRange[0] - 2; i < xRange[1] + 2; i++) {
           for (let j = yRange[0] - 2; j < yRange[1] + 2; j++) {
@@ -211,6 +216,7 @@ export default function ColorWheelFabricDistribution() {
         var randomBorderPixel = Math.floor(Math.random() * borderPixels.size())
         console.log(Math.floor(Math.random() * borderPixels.size()))
         var picked = d3.select(borderPixels._groups[0][randomBorderPixel])
+        console.log('PICKED')
         console.log(picked)
         // @ts-ignore
         posX = picked.attr('x')
