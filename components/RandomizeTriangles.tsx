@@ -235,7 +235,13 @@ export default function RandomizeTriangles() {
         </Button>
         {false && <Button variant="contained">Download</Button>}
         <Divider sx={{ m: '20px 0px' }} />
-        <Typography>The Color Pie</Typography>
+        <Typography component="h3">The Color Pie</Typography>
+        <Typography>
+          Update your color pie and click 'Re-generate' to create a random
+          design. Best supported on a desktop/laptop (the save functionality is
+          not supported by up to date iPhones). Read more details about this
+          blog post below!
+        </Typography>
         <div id="pie-container"></div>
         <Divider sx={{ m: '20px 0px' }} />
         {Object.keys(fabricSwatches).map((swatchKey) => {

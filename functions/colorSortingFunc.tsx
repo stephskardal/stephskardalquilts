@@ -1,8 +1,3 @@
-//export const Color = (hexVal) => {
-//define a Color class for the color objects
-//  this.hex = hexVal
-//}
-
 export const colorColorSorting = {
   sortColorsBy: function (colors, key) {
     return colors.sort(function (a, b) {

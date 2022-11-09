@@ -7,6 +7,11 @@ function Tools() {
 export default Tools
 
 let toolPosts = [
+  //{
+  //  title: 'Battleship',
+  //  width: 300,
+  //  height: 250
+  //},
   {
     title: 'Digital Swatches for Procreate',
     width: 313,
