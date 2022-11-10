@@ -130,7 +130,7 @@ export default function DigitalSwatching() {
               <Divider />
             </>
           )}
-          <Divider sx={{ mt: '20px' }} />
+          <Divider sx={{ mt: '20px', mb: '20px' }} />
 
           <FabricButtons
             onclickEvent={changeLine}
