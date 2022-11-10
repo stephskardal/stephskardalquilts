@@ -4,9 +4,10 @@ import { quickColorSorting } from '../functions/quickSortingFunc'
 import { Grid, Button, Box } from '@mui/material'
 
 export default function ColorWheelFabricDistribution() {
+  const battleshipRef = React.useRef()
   const [loaded, setLoaded] = React.useState<boolean>(false)
   const [sortedColors, setSortedColors] = React.useState<string[]>([])
-  var colors = [
+  var colors: string[] = [
     '#4D693D',
     '#457D3A',
     '#6F782A',
@@ -70,7 +71,7 @@ export default function ColorWheelFabricDistribution() {
 
   const getColor = (xPos, yPos, maxX, maxY) => {
     let distance: number = Math.sqrt(xPos * xPos + yPos * yPos)
-    var scaledTo = Number.parseInt(
+    let scaledTo: number = Number.parseInt(
       // @ts-ignore
       (colors.length * distance) / Math.sqrt(maxX * maxY * 2)
     )
@@ -81,8 +82,8 @@ export default function ColorWheelFabricDistribution() {
     let maxDimensionX: number = 100
     let maxDimensionY: number = 120
 
-    var markedData = []
-    for (var i = 0; i < maxDimensionX; i++) {
+    let markedData = []
+    for (let i = 0; i < maxDimensionX; i++) {
       for (let j = 0; j < maxDimensionY; j++) {
         markedData[`${i}-${j}`] = 'background'
       }
@@ -94,14 +95,14 @@ export default function ColorWheelFabricDistribution() {
     var posX: number = 0
     var posY: number = 0
     while (borderPixels.length > 0) {
-      let randomNumber = Math.floor(Math.random() * 4)
+      let randomNumber: number = Math.floor(Math.random() * 4)
       if (randomNumber == 0) {
         // console.log('direction is up')
         var minY = posY
         while (minY > 1 && markedData[`${posX}-${minY}`] == 0) {
           minY -= 1
         }
-        var maxDistance = Math.floor(Math.random() * maxDimensionY) + 1
+        var maxDistance: number = Math.floor(Math.random() * maxDimensionY) + 1
         var xRange = [posX, posX + 1]
         var yRange = [posY - maxDistance, posY]
       } else if (randomNumber == 1) {
@@ -110,7 +111,7 @@ export default function ColorWheelFabricDistribution() {
         while (maxY < maxDimensionY && markedData[`${posX}-${maxY}`] == 0) {
           maxY++
         }
-        var maxDistance = Math.floor(Math.random() * maxDimensionY) + 1
+        var maxDistance: number = Math.floor(Math.random() * maxDimensionY) + 1
         var xRange = [posX, posX + 1]
         var yRange = [posY, posY + maxDistance]
       } else if (randomNumber == 2) {
@@ -200,14 +201,16 @@ export default function ColorWheelFabricDistribution() {
 
     d3.select('#battleship').select('svg').remove()
 
-    var svg = d3
+    let svg = d3
       .select('#battleship')
       .append('svg')
-      .attr('width', 500) // maxDimensionX)
-      .attr('height', 500) //maxDimensionY)
+      // @ts-ignore
+      .attr('width', battleshipRef.current.offsetWith)
+      // @ts-ignore
+      .attr('height', battleshipRef.current.offsetWidth)
       .attr('viewBox', `0 0 ${maxDimensionX} ${maxDimensionY}`)
     // draw a svg grid of rectangles, black
-    for (var i = 0; i < maxDimensionX; i++) {
+    for (let i = 0; i < maxDimensionX; i++) {
       // markedData[i] = []
       for (let j = 0; j < maxDimensionY; j++) {
         let val = markedData[`${i}-${j}`]
@@ -235,13 +238,13 @@ export default function ColorWheelFabricDistribution() {
   return (
     <Box>
       <Grid container spacing={2}>
-        <Grid item sm={8} xs={12}>
-          <div id="battleship"></div>
-        </Grid>
-        <Grid item sm={4} xs={12}>
+        <Grid item sm={3} xs={12}>
           <Button onClick={refresh} variant="contained">
             Refresh
           </Button>
+        </Grid>
+        <Grid item sm={9} xs={12} ref={battleshipRef}>
+          <div id="battleship"></div>
         </Grid>
       </Grid>
     </Box>
