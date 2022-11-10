@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Button } from '@mui/material'
 
-import { fabricSwatches } from '../public/custom_js/fabricSwatches'
+import { fabricSwatches } from 'public/fabricSwatches'
 import SingleSortedColor from './SingleSortedColor'
 
 export default function ColorSorting() {
@@ -10,6 +10,13 @@ export default function ColorSorting() {
   const changeType = (el) => {
     setSortType(el.target.value)
   }
+
+  const ordered = Object.keys(fabricSwatches)
+    .sort()
+    .reduce((obj, key) => {
+      obj[key] = fabricSwatches[key]
+      return obj
+    }, {})
 
   return (
     <Box sx={{ textAlign: 'center' }}>
@@ -26,7 +33,7 @@ export default function ColorSorting() {
           </Button>
         )
       })}
-      {Object.keys(fabricSwatches).map((swatchKey) => {
+      {Object.keys(ordered).map((swatchKey) => {
         return <SingleSortedColor swatchKey={swatchKey} sortType={sortType} />
       })}
     </Box>

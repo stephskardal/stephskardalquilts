@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { Divider, Tooltip, Box, Grid, Button, Typography } from '@mui/material'
 import * as d3 from 'd3'
-import { fabricSwatches } from 'public/custom_js/fabricSwatches'
+import { fabricSwatches } from 'public/fabricSwatches'
 import { colorColorSorting } from 'functions/colorSortingFunc'
+import FabricButtons from './FabricButtons'
 
 export default function RandomizeTriangles() {
   const gridRef = React.useRef()
@@ -244,19 +245,11 @@ export default function RandomizeTriangles() {
         </Typography>
         <div id="pie-container"></div>
         <Divider sx={{ m: '20px 0px' }} />
-        {Object.keys(fabricSwatches).map((swatchKey) => {
-          return (
-            <Button
-              size="small"
-              sx={{ m: '0px 5px 5px 0px' }}
-              onClick={changeLine}
-              value={swatchKey}
-              variant={selectedLine == swatchKey ? 'contained' : 'outlined'}
-            >
-              {swatchKey}
-            </Button>
-          )
-        })}
+        <FabricButtons
+          onclickEvent={changeLine}
+          selectedLine={selectedLine}
+          title="Fabric Lines"
+        />
         <Divider sx={{ m: '20px 0px' }} />
         {sortedColors.map((swatchKey) => {
           return (

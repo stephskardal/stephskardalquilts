@@ -8,9 +8,10 @@ import {
   Button,
   Link
 } from '@mui/material'
-import { fabricSwatches } from '../public/custom_js/fabricSwatches'
+import { fabricSwatches } from 'public/fabricSwatches'
 import Draggable from 'react-draggable'
 import CloseIcon from '@mui/icons-material/Close'
+import FabricButtons from 'components/FabricButtons'
 
 export default function DigitalSwatching() {
   const [sortType, setSortType] = React.useState<string>('Hue')
@@ -19,9 +20,8 @@ export default function DigitalSwatching() {
     setSortType(el.target.value)
   }
 
-  const [selectedLines, setSelectedLines] = React.useState<string[]>(
-    Object.keys(fabricSwatches)
-  )
+  const [selectedLine, setSelectedLine] =
+    React.useState<string>('aurifilThread')
   const [draggableSwatches, setDraggableSwatches] = React.useState<any[]>([])
 
   const resetSwatches = () => {
@@ -33,11 +33,7 @@ export default function DigitalSwatching() {
   }
 
   const changeLine = (el) => {
-    if (!selectedLines.includes(el.target.value)) {
-      setSelectedLines([...selectedLines, el.target.value])
-    } else {
-      setSelectedLines(selectedLines.filter((p) => p != el.target.value))
-    }
+    setSelectedLine(el.target.value)
   }
 
   const closeItem = (el) => {
@@ -93,7 +89,7 @@ export default function DigitalSwatching() {
 
   let filteredSwatches = {}
   Object.keys(fabricSwatches).forEach((swatchKey) => {
-    if (selectedLines.includes(swatchKey)) {
+    if (selectedLine == swatchKey) {
       Object.keys(fabricSwatches[swatchKey].swatches).forEach((key) => {
         let newKey: string = fabricSwatches[swatchKey].label + ': ' + key
         filteredSwatches[newKey] = fabricSwatches[swatchKey].swatches[key]
@@ -136,23 +132,11 @@ export default function DigitalSwatching() {
           )}
           <Divider sx={{ mt: '20px' }} />
 
-          <Typography component="h3" sx={{ mt: '10px', mb: '10px' }}>
-            Fabric Lines
-          </Typography>
-          {Object.keys(fabricSwatches).map((swatchKey) => {
-            return (
-              <Button
-                onClick={changeLine}
-                value={swatchKey}
-                sx={{ m: '0px 0px 5px 5px' }}
-                variant={
-                  selectedLines.includes(swatchKey) ? 'contained' : 'outlined'
-                }
-              >
-                {swatchKey}
-              </Button>
-            )
-          })}
+          <FabricButtons
+            onclickEvent={changeLine}
+            selectedLine={selectedLine}
+            title="Fabric Line"
+          />
         </Box>
       </Grid>
       <Grid item md={8} xs={12} id="draggingSection">

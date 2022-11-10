@@ -3,8 +3,9 @@ import { Typography, Grid, Box, Divider, Button } from '@mui/material'
 
 import ColorThief from 'functions/color-thief.js'
 import chroma from 'chroma-js'
+import FabricButtons from './FabricButtons'
 
-import { fabricSwatches } from '../public/custom_js/fabricSwatches'
+import { fabricSwatches } from 'public/fabricSwatches'
 
 export default function ColorPalette() {
   const [swatchResultWidth, setSwatchResultWidth] =
@@ -18,12 +19,10 @@ export default function ColorPalette() {
 
   const changeLine = (event) => {
     setSelectedLine(event.target.value)
-    renderPalette(loadedImage)
   }
 
   const changeMatch = (event) => {
     setMatchType(event.target.value)
-    renderPalette(loadedImage)
   }
 
   const renderSwatch = (swatch) => {
@@ -169,7 +168,7 @@ export default function ColorPalette() {
       setLoadedImage(image)
       renderPalette(image)
     }
-  }, [localImage, swatchResultWidth])
+  }, [localImage, swatchResultWidth, selectedLine, matchType])
 
   const renderPalette = (filename: string) => {
     let palette = {}
@@ -291,21 +290,11 @@ export default function ColorPalette() {
             display: { md: 'none', sm: 'block' }
           }}
         />
-        <Typography component="h3">Fabric Line</Typography>
-        {Object.keys(fabricSwatches).map((swatchKey) => {
-          return (
-            <Button
-              key={swatchKey}
-              size="small"
-              onClick={changeLine}
-              value={swatchKey}
-              sx={{ mb: '5px', mr: '5px' }}
-              variant={selectedLine == swatchKey ? 'contained' : 'outlined'}
-            >
-              {fabricSwatches[swatchKey].label}
-            </Button>
-          )
-        })}
+        <FabricButtons
+          title="Fabric Line"
+          onclickEvent={changeLine}
+          selectedLine={selectedLine}
+        />
       </Grid>
       <Grid item md={8} xs={12} sx={{ m: '0px auto' }} id="swatch-result">
         <Divider

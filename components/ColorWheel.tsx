@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as d3 from 'd3'
 import { Typography, Grid, Divider, Button } from '@mui/material'
 import { scaleSqrt, scaleLinear } from 'd3-scale'
-import { fabricSwatches } from 'public/custom_js/fabricSwatches'
+import { fabricSwatches } from 'public/fabricSwatches'
 import { colorColorSorting } from 'functions/colorSortingFunc'
 
 var Color = function Color(hexVal) {

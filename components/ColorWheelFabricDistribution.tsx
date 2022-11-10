@@ -1,8 +1,8 @@
 import * as React from 'react'
 import * as d3 from 'd3'
 import { Grid, Button, Typography } from '@mui/material'
-import { fabricSwatches } from '../public/custom_js/fabricSwatches'
-import { colorColorSorting } from '../functions/colorSortingFunc'
+import { fabricSwatches } from 'public/fabricSwatches'
+import { colorColorSorting } from 'functions/colorSortingFunc'
 
 var Color = function Color(hexVal) {
   //define a Color class for the color objects
