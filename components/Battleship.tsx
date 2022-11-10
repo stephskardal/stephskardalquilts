@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as d3 from 'd3'
 import { quickColorSorting } from '../functions/quickSortingFunc'
+import { Grid, Button, Box } from '@mui/material'
 
 export default function ColorWheelFabricDistribution() {
   const [loaded, setLoaded] = React.useState<boolean>(false)
@@ -51,10 +52,6 @@ export default function ColorWheelFabricDistribution() {
   React.useEffect(() => {
     if (!loaded) {
       setSortedColors(quickColorSorting.sort(colors, 'hue'))
-      //for (var i = 0; i < 0; i++) {
-      //  var shifted = sortedColors.pop();
-      //  sortedColors.unshift(shifted);
-      // }
       setLoaded(true)
     }
   }, [])
@@ -63,11 +60,15 @@ export default function ColorWheelFabricDistribution() {
     battleship()
   }, [sortedColors])
 
-  let pullRandom = (arr: string[]) => {
+  const refresh = () => {
+    battleship()
+  }
+
+  const pullRandom = (arr: string[]) => {
     return arr[Math.floor(Math.random() * arr.length)]
   }
 
-  let getColor = (xPos, yPos, maxX, maxY) => {
+  const getColor = (xPos, yPos, maxX, maxY) => {
     let distance: number = Math.sqrt(xPos * xPos + yPos * yPos)
     var scaledTo = Number.parseInt(
       // @ts-ignore
@@ -77,8 +78,8 @@ export default function ColorWheelFabricDistribution() {
   }
 
   const battleship = () => {
-    let maxDimensionX: number = 10
-    let maxDimensionY: number = 10
+    let maxDimensionX: number = 100
+    let maxDimensionY: number = 120
 
     var markedData = []
     for (var i = 0; i < maxDimensionX; i++) {
@@ -87,81 +88,64 @@ export default function ColorWheelFabricDistribution() {
       }
     }
 
-    // from seed position
-    // select up, down, left, or right
     let borderPixels = Object.keys(markedData).filter(
       (key) => markedData[key] == 'background'
     )
-
-    var posX: number = 0 //maxDimensionX / 2;
-    var posY: number = 0 //maxDimensionY / 2;
-    for (let loop = 0; loop < 1; loop++) {
-      //while (borderPixels.length > 0) {
+    var posX: number = 0
+    var posY: number = 0
+    while (borderPixels.length > 0) {
       let randomNumber = Math.floor(Math.random() * 4)
-      randomNumber = 1
       if (randomNumber == 0) {
-        console.log('direction is up')
+        // console.log('direction is up')
         var minY = posY
         while (minY > 1 && markedData[`${posX}-${minY}`] == 0) {
           minY -= 1
         }
-        var maxDistance = posY - minY //Math.floor(Math.random() * (posY - minY)) + 1;
+        var maxDistance = Math.floor(Math.random() * maxDimensionY) + 1
         var xRange = [posX, posX + 1]
         var yRange = [posY - maxDistance, posY]
       } else if (randomNumber == 1) {
-        console.log('direction is down')
+        // console.log('direction is down')
         var maxY = posY
         while (maxY < maxDimensionY && markedData[`${posX}-${maxY}`] == 0) {
-          maxY = maxY + 1
+          maxY++
         }
-        var maxDistance = maxY - posY //Math.floor(Math.random() * (maxY - posY)) + 1;
+        var maxDistance = Math.floor(Math.random() * maxDimensionY) + 1
         var xRange = [posX, posX + 1]
         var yRange = [posY, posY + maxDistance]
       } else if (randomNumber == 2) {
-        console.log('direction is left')
+        // console.log('direction is left')
         var minX = posX
         while (minX > 1 && markedData[`${minX}-${posY}`] == 0) {
-          minX = minX - 1
+          minX--
         }
-        var maxDistance = posX - minX //Math.floor(Math.random() * (posX - minX)) + 1;
+        var maxDistance = Math.floor(Math.random() * maxDimensionX) + 1
         var xRange = [posX - maxDistance, posX + 1]
         var yRange = [posY, posY + 1]
       } else if (randomNumber == 3) {
-        console.log('direction is right')
+        // console.log('direction is right')
         var maxX = posX
-        console.log('max x: ' + maxX)
-        console.log('pos y: ' + posY)
-        while (maxX < maxDimensionX && markedData[`${maxX}-${posY} `] == 0) {
-          console.log('max x: ' + maxX)
-          console.log('pos y: ' + posY)
+        while (maxX < maxDimensionX && markedData[`${maxX}-${posY}`] == 0) {
           maxX = maxX + 1
         }
-        let maxDistance = maxX - posX //Math.floor(Math.random() * (maxX - posX)) + 1;
+        var maxDistance = Math.floor(Math.random() * maxDimensionX) + 1
+        //let maxDistance = maxX - posX //Math.floor(Math.random() * (maxX - posX)) + 1;
         var xRange = [posX, posX + maxDistance]
         var yRange = [posY, posY + 1]
       }
 
-      console.log('ranges: ')
-      console.log(xRange)
-      console.log(yRange)
-
       if (xRange[1] != xRange[0] && yRange[1] != yRange[0]) {
-        // Retrieve color scaled
-        // Setting all the border border
+        let color = getColor(xRange[0], yRange[0], maxDimensionX, maxDimensionY)
         for (let i = xRange[0] - 2; i < xRange[1] + 2; i++) {
           for (let j = yRange[0] - 2; j < yRange[1] + 2; j++) {
             if (
               markedData[`${i}-${j}`] !== undefined &&
-              markedData[`${i}-${j}`] == 0
+              markedData[`${i}-${j}`] == 'background'
             ) {
               markedData[`${i}-${j}`] = 'border'
-              // d3.select('.x-' + i + '-y-' + j).classed('gray', true)
             }
           }
         }
-
-        console.log('bordering!')
-        console.log(markedData)
 
         // Creating the border
         for (let i = xRange[0] - 1; i < xRange[1] + 1; i++) {
@@ -175,23 +159,17 @@ export default function ColorWheelFabricDistribution() {
           }
         }
 
-        console.log('bordering!')
-        console.log(markedData)
-
         // Creating the color strip
         for (let i = xRange[0]; i < xRange[1]; i++) {
           for (let j = yRange[0]; j < yRange[1]; j++) {
             if (
               markedData[`${i}-${j}`] !== undefined &&
-              markedData[`${i}-${j}`] != 'color'
+              !markedData[`${i}-${j}`].match(/^color-/)
             ) {
-              console.log('setting something to color')
-              markedData[`${i}-${j}`] = 'color'
+              markedData[`${i}-${j}`] = `color-${color}`
             }
           }
         }
-        console.log('bordering!')
-        console.log(markedData)
 
         borderPixels = Object.keys(markedData).filter(
           (key) => markedData[key] == 'border'
@@ -207,13 +185,9 @@ export default function ColorWheelFabricDistribution() {
         )
       }
 
-      console.log('border pixels')
-      console.log(borderPixels)
       if (borderPixels.length != 0) {
         // Pick a random item from this array;
         let randomBorderPixel = pullRandom(borderPixels)
-        console.log('PICKED')
-        console.log(randomBorderPixel)
         posX = parseInt(randomBorderPixel.split('-')[0])
         posY = parseInt(randomBorderPixel.split('-')[1])
 
@@ -221,7 +195,6 @@ export default function ColorWheelFabricDistribution() {
           (key) => markedData[key] == 'border'
         )
         stillGray.forEach((z) => (markedData[z] = 'background'))
-        console.log('new x and y is: ' + posX + ' ' + posY)
       }
     }
 
@@ -232,17 +205,19 @@ export default function ColorWheelFabricDistribution() {
       .append('svg')
       .attr('width', 500) // maxDimensionX)
       .attr('height', 500) //maxDimensionY)
-      .attr('viewBox', '0 0 10 10')
+      .attr('viewBox', `0 0 ${maxDimensionX} ${maxDimensionY}`)
     // draw a svg grid of rectangles, black
     for (var i = 0; i < maxDimensionX; i++) {
       // markedData[i] = []
       for (let j = 0; j < maxDimensionY; j++) {
         let val = markedData[`${i}-${j}`]
-        let fill = '#FFF'
-        if (val == 'color') {
-          fill = getColor(i, j, maxDimensionX, maxDimensionY)
+        let fill = '#000'
+        if (val == 'white') {
+          fill = '#FFF'
         }
-        console.log('fill is ' + fill)
+        if (val.match('color')) {
+          fill = val.split('-')[1]
+        }
 
         svg
           .append('rect')
@@ -257,5 +232,18 @@ export default function ColorWheelFabricDistribution() {
     }
   }
 
-  return <div id="battleship"></div>
+  return (
+    <Box>
+      <Grid container spacing={2}>
+        <Grid item sm={8} xs={12}>
+          <div id="battleship"></div>
+        </Grid>
+        <Grid item sm={4} xs={12}>
+          <Button onClick={refresh} variant="contained">
+            Refresh
+          </Button>
+        </Grid>
+      </Grid>
+    </Box>
+  )
 }
