@@ -19,7 +19,7 @@ export default Blog
 
 let blogPosts = [
   {
-    title: "Pantone Now in the Color Tools",
+    title: 'Pantone Now in the Color Tools',
     width: 2038,
     height: 1252
   },
