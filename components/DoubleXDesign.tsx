@@ -92,31 +92,25 @@ export default function ColorWheelFabricDistribution() {
   }
 
   const doublex = () => {
-    let maxDimension: number = 20
+    let maxDimension: number = 120
     let diagonalDistance: number = Math.sqrt(2 * maxDimension * maxDimension)
     var posX: number = 0 //maxDimension / 2;
     var posY: number = 0 //maxDimension / 2;
     var markedData = []
 
-    // draw a svg grid of rectangles, black
     for (let i = 0; i < maxDimension; i++) {
-      markedData[i] = []
       for (let j = 0; j < maxDimension; j++) {
-        markedData[i][j] = 0
+        markedData[`${i}-${j}`] = 'background'
       }
     }
 
     // @ts-ignore
-    let triangleCenter: number = parseInt(maxDimension / 2);
+    let triangleCenter: number = parseInt(maxDimension / 2)
 
-    [50, 40, 30, 20, 10].forEach((triangleHeight) => {
+    ;[50, 40, 30, 20, 10].forEach((triangleHeight) => {
       var fill = 'white'
-      var className = ' filled-white'
-      var dataToSet = 1
       if (triangleHeight % 20 == 0) {
-        fill = 'black'
-        className = ' black'
-        dataToSet = 0
+        fill = 'background'
       }
       for (
         let i = triangleCenter - triangleHeight;
@@ -128,145 +122,162 @@ export default function ColorWheelFabricDistribution() {
           j < triangleHeight - Math.abs(triangleCenter - i);
           j++
         ) {
-          markedData[i][j] = dataToSet
-          markedData[j][i] = dataToSet
-          d3.select('.x-' + i + '-y-' + j)
-            .style('fill', fill)
-            .attr('class', 'x-' + i + '-y-' + j + className)
+          markedData[`${i}-${j}`] = fill
+          markedData[`${j}-${i}`] = fill
 
           var flippedY = maxDimension - j
-          markedData[i][flippedY] = dataToSet
-          d3.select('.x-' + i + '-y-' + flippedY)
-            .style('fill', fill)
-            .attr('class', 'x-' + i + '-y-' + flippedY + className)
-          d3.select('.x-' + j + '-y-' + i)
-            .style('fill', fill)
-            .attr('class', 'x-' + j + '-y-' + i + className)
-
+          markedData[`${i}-${flippedY}`] = fill
           var flippedX = maxDimension - j
           if (flippedX != maxDimension) {
-            markedData[flippedX][i] = dataToSet
-            d3.select('.x-' + flippedX + '-y-' + i)
-              .style('fill', fill)
-              .attr('class', 'x-' + flippedX + '-y-' + i + className)
+            markedData[`${flippedX}-${i}`] = fill
           }
         }
       }
     })
 
-    /*
-    //for(var loop = 0; loop < 3; loop++) {
-    while (d3.selectAll('.black').size() > 0) {
-      var randomNumber = Math.floor(Math.random() * 4);
-      if (randomNumber == 0) { // up
-        var minY = posY;
-        while (minY > 1 && markedData[posX][minY] == 0) {
-          minY -= 1;
+    console.log(markedData)
+
+    let borderPixels = Object.keys(markedData).filter(
+      (key) => markedData[key] == 'background'
+    )
+    var posX: number = 0
+    var posY: number = 0
+    while (borderPixels.length > 0) {
+      // for (let z = 0; z < 2; z++) {
+      let randomNumber: number = Math.floor(Math.random() * 4)
+      if (randomNumber == 0) {
+        // console.log('direction is up')
+        var minY = posY
+        while (minY > 1 && markedData[`${posX}-${minY}`] == 0) {
+          minY -= 1
         }
-        var maxDistance = posY - minY; //Math.floor(Math.random() * (posY - minY)) + 1;
-        var xRange = [parseInt(posX), parseInt(posX) + 1];
-        var yRange = [parseInt(posY) - maxDistance, parseInt(posY)];
-      } else if (randomNumber == 1) { // down
-        var maxY = posY;
-        while (maxY < maxDimension && markedData[posX][maxY] == 0) {
-          maxY = parseInt(maxY) + 1;
+        var maxDistance: number = Math.floor(Math.random() * 10) + 1
+        var xRange = [posX, posX + 1]
+        var yRange = [posY - maxDistance, posY]
+      } else if (randomNumber == 1) {
+        // console.log('direction is down')
+        var maxY = posY
+        while (maxY < maxDimension && markedData[`${posX}-${maxY}`] == 0) {
+          maxY++
         }
-        var maxDistance = maxY - posY; //Math.floor(Math.random() * (maxY - posY)) + 1;
-        var xRange = [parseInt(posX), parseInt(posX) + 1];
-        var yRange = [parseInt(posY), parseInt(posY) + maxDistance];
-      } else if (randomNumber == 2) { // left
-        var minX = posX;
-        while (minX > 1 && markedData[minX][posY] == 0) {
-          minX = parseInt(minX) - 1;
+        var maxDistance: number = Math.floor(Math.random() * 10) + 1
+        var xRange = [posX, posX + 1]
+        var yRange = [posY, posY + maxDistance]
+      } else if (randomNumber == 2) {
+        // console.log('direction is left')
+        var minX = posX
+        while (minX > 1 && markedData[`${minX}-${posY}`] == 0) {
+          minX--
         }
-        var maxDistance = posX - minX; //Math.floor(Math.random() * (posX - minX)) + 1;
-        var xRange = [parseInt(posX) - parseInt(maxDistance), parseInt(posX) + 1];
-        var yRange = [parseInt(posY), parseInt(posY) + 1];
-      } else if (randomNumber == 3) { // right
-        var maxX = posX;
-        while (maxX < maxDimension && markedData[maxX][posY] == 0) {
-          maxX = parseInt(maxX) + 1;
+        var maxDistance = Math.floor(Math.random() * 10) + 1
+        var xRange = [posX - maxDistance, posX + 1]
+        var yRange = [posY, posY + 1]
+      } else if (randomNumber == 3) {
+        // console.log('direction is right')
+        var maxX = posX
+        while (maxX < maxDimension && markedData[`${maxX}-${posY}`] == 0) {
+          maxX = maxX + 1
         }
-        var maxDistance = maxX - posX; //Math.floor(Math.random() * (maxX - posX)) + 1;
-        var xRange = [parseInt(posX), parseInt(posX) + parseInt(maxDistance)];
-        var yRange = [parseInt(posY), parseInt(posY) + 1];
+        var maxDistance = Math.floor(Math.random() * 10) + 1
+        var xRange = [posX, posX + maxDistance]
+        var yRange = [posY, posY + 1]
       }
 
-      var borderPixels;
       if (xRange[1] != xRange[0] && yRange[1] != yRange[0]) {
-        var xdistance = xRange[0]; //(maxDimension/2 - xRange[0]);
-        var ydistance = maxDimension - yRange[0]; //(maxDimension/2 - xRange[0]);
-        var distance = Math.sqrt(xdistance * xdistance + ydistance * ydistance);
-        var scaledTo = parseInt(parseFloat(colors.length) * parseFloat(distance) / diagonalDistance);
-        //var color = '#FFFFFF'; //sortedColors[scaledTo];
-        var color = sortedColors[scaledTo];
-
-        for (i = xRange[0] - 2; i < xRange[1] + 2; i++) {
-          for (j = yRange[0] - 2; j < yRange[1] + 2; j++) {
-            if (markedData[i] !== undefined && markedData[i][j] !== undefined && markedData[i][j] == 0) {
-              d3.select('.x-' + i + '-y-' + j).classed('gray', true);
+        let color = getColor(xRange[0], yRange[0], maxDimension, maxDimension)
+        for (let i = xRange[0] - 2; i < xRange[1] + 2; i++) {
+          for (let j = yRange[0] - 2; j < yRange[1] + 2; j++) {
+            if (
+              markedData[`${i}-${j}`] !== undefined &&
+              markedData[`${i}-${j}`] == 'background'
+            ) {
+              markedData[`${i}-${j}`] = 'border'
             }
           }
         }
 
-        for (i = xRange[0] - 1; i < xRange[1] + 1; i++) {
-          for (j = yRange[0] - 1; j < yRange[1] + 1; j++) {
-            if (markedData[i] !== undefined && markedData[i][j] !== undefined && markedData[i][j] != 1) {
-              d3.select('.x-' + i + '-y-' + j).style('fill', 'white').attr('class', 'x-' + i + '-y-' + j + ' filled-white');
-              markedData[i][j] = 2;
+        // Creating the border
+        for (let i = xRange[0] - 1; i < xRange[1] + 1; i++) {
+          for (let j = yRange[0] - 1; j < yRange[1] + 1; j++) {
+            if (
+              markedData[`${i}-${j}`] !== undefined &&
+              markedData[`${i}-${j}`] == 'border'
+            ) {
+              markedData[`${i}-${j}`] = 'immediate_border'
             }
           }
         }
 
-        for (i = xRange[0]; i < xRange[1]; i++) {
-          for (j = yRange[0]; j < yRange[1]; j++) {
-            if (markedData[i] !== undefined && markedData[i][j] !== undefined && markedData[i][j] != 1) {
-              d3.select('.x-' + i + '-y-' + j).style('fill', color).attr('class', 'x-' + i + '-y-' + j).attr('stroke', 'black').attr('stroke-width', '0.01px');
-              markedData[i][j] = 1;
+        // Creating the color strip
+        for (let i = xRange[0]; i < xRange[1]; i++) {
+          for (let j = yRange[0]; j < yRange[1]; j++) {
+            if (
+              markedData[`${i}-${j}`] !== undefined &&
+              markedData[`${i}-${j}`] == 'immediate_border'
+            ) {
+              markedData[`${i}-${j}`] = `color-${color}`
             }
           }
         }
-        borderPixels = d3.selectAll('.gray');
-        if (borderPixels.size() == 0) {
-          borderPixels = d3.selectAll('.black');
-        }
-      } else {
-        borderPixels = d3.selectAll('.black');
       }
+      borderPixels = Object.keys(markedData).filter(
+        (key) => markedData[key] == 'background'
+      )
 
-      if (borderPixels.size() != 0) {
-        var randomBorderPixel = Math.floor(Math.random() * borderPixels.size());
-        var picked = d3.select(borderPixels[0][randomBorderPixel]);
-        posX = picked.attr('x');
-        posY = picked.attr('y');
-        d3.selectAll('.gray').classed('gray', false).classed('black', true);
-        //console.log('new x and y is: ' + posX + ' ' + posY);
-      }
-    }
-    $('rect.filled-white').remove();
-    console.log($('rect').length);
+      if (borderPixels.length != 0) {
+        // Pick a random item from this array;
+        let randomBorderPixel = pullRandom(borderPixels)
+        posX = parseInt(randomBorderPixel.split('-')[0])
+        posY = parseInt(randomBorderPixel.split('-')[1])
 
-    var factor = 40;
-    for (var i = 0; i < maxDimension; i++) {
-      for (j = 0; j < maxDimension; j++) {
-        d3.select('.x-' + i + '-y-' + j).attr('height', factor).attr('width', factor).attr('x', i * factor).attr('y', j * factor);
+        let stillGray: string[] = Object.keys(markedData).filter(
+          (key) => markedData[key] == 'border'
+        )
+        stillGray.forEach((z) => (markedData[z] = 'background'))
+        let newBorder: string[] = Object.keys(markedData).filter(
+          (key) => markedData[key] == 'immediate_border'
+        )
+        newBorder.forEach((z) => (markedData[z] = 'white'))
       }
     }
 
-    // SVG viewport
-    var svg = d3.select('body')
+    d3.select('#doublex').select('svg').remove()
+
+    let svg = d3
       .select('#doublex')
       .append('svg')
-      .attr('id', 'color-me-svg')
-      .attr('width', maxDimension)
-      .attr('height', maxDimension)
-      .attr('viewBox', '0 0 ' + maxDimension + ' ' + maxDimension);
+      // @ts-ignore
+      .attr('width', doublexRef.current.offsetWith)
+      // @ts-ignore
+      .attr('height', doublexRef.current.offsetWidth)
+      .attr('viewBox', `0 0 ${maxDimension} ${maxDimension}`)
+    // draw a svg grid of rectangles, black
+    for (let i = 0; i < maxDimension; i++) {
+      // markedData[i] = []
+      for (let j = 0; j < maxDimension; j++) {
+        let val = markedData[`${i}-${j}`]
+        let fill = '#000'
+        if (val == 'white') {
+          fill = '#FFF'
+        }
+        if (val.match('color')) {
+          fill = val.split('-')[1]
+        }
+        if (val.match('border')) {
+          fill = 'red'
+        }
 
-    /// Need to loop through
-
-    d3.select('svg').attr('width', maxDimension * factor).attr('height', maxDimension * factor)
-      .attr('viewBox', '0 0 ' + maxDimension * factor + ' ' + maxDimension * factor).style('fill', '#FFFFFF');
-    */
+        svg
+          .append('rect')
+          .attr('width', 1)
+          .attr('height', 1)
+          .attr('x', i)
+          .attr('y', j)
+          .style('fill', fill)
+          .style('stroke', '#FFF')
+          .style('stroke-width', '0.01px')
+      }
+    }
   }
 
   return (
