@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as d3 from 'd3'
-import { quickColorSorting } from '../functions/quickSortingFunc'
-import { Grid, Button, Box } from '@mui/material'
+import { quickColorSorting } from 'functions/quickSortingFunc'
+import { Grid, Button, CircularProgress, Box } from '@mui/material'
 
 export default function ColorWheelFabricDistribution() {
   const battleshipRef = React.useRef()
@@ -58,7 +58,9 @@ export default function ColorWheelFabricDistribution() {
   }, [])
 
   React.useEffect(() => {
-    battleship()
+    if (sortedColors.length > 0) {
+      battleship()
+    }
   }, [sortedColors])
 
   const refresh = () => {
@@ -238,12 +240,12 @@ export default function ColorWheelFabricDistribution() {
   return (
     <Box>
       <Grid container spacing={2}>
-        <Grid item sm={3} xs={12}>
+        <Grid item sm={12} xs={12}>
           <Button onClick={refresh} variant="contained">
             Refresh
           </Button>
         </Grid>
-        <Grid item sm={9} xs={12} ref={battleshipRef}>
+        <Grid item sm={12} xs={12} ref={battleshipRef}>
           <div id="battleship"></div>
         </Grid>
       </Grid>

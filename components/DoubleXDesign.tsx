@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as d3 from 'd3'
-import { quickColorSorting } from '../functions/quickSortingFunc'
+import { quickColorSorting } from 'functions/quickSortingFunc'
 import { Grid, Button, Box } from '@mui/material'
 
 export default function ColorWheelFabricDistribution() {
@@ -71,7 +71,9 @@ export default function ColorWheelFabricDistribution() {
   }, [])
 
   React.useEffect(() => {
-    doublex()
+    if (sortedColors.length > 0) {
+      doublex()
+    }
   }, [sortedColors])
 
   const refresh = () => {
@@ -283,12 +285,12 @@ export default function ColorWheelFabricDistribution() {
   return (
     <Box>
       <Grid container spacing={2}>
-        <Grid item sm={3} xs={12}>
+        <Grid item sm={12} xs={12}>
           <Button onClick={refresh} variant="contained">
             Refresh
           </Button>
         </Grid>
-        <Grid item sm={9} xs={12} ref={doublexRef}>
+        <Grid item sm={12} xs={12} ref={doublexRef}>
           <div id="doublex"></div>
         </Grid>
       </Grid>
