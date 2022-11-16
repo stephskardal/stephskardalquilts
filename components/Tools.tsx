@@ -13,6 +13,11 @@ let toolPosts = [
   //  height: 250
   //},
   {
+    title: 'Pantone Color Match',
+    width: 1978,
+    height: 978
+  },
+  {
     title: 'Digital Swatches for Procreate',
     width: 313,
     height: 241

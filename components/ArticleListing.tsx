@@ -27,7 +27,8 @@ function ArticleListing(props: ArticleListingProps) {
             .replace(/\s+/g, '-')
             .toLowerCase()
             .replace(/[^0-9a-z-]/g, '')
-          let linkUrl = props.urlBase + route
+          let linkUrl =
+            (post.urlBase !== undefined ? post.urlBase : props.urlBase) + route
           return (
             <Grid key={route} item md={4} xs={12} sx={{ mb: '30px' }}>
               <Box sx={{ padding: '0px 3%' }}>

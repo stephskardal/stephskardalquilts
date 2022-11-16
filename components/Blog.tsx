@@ -19,6 +19,12 @@ export default Blog
 
 let blogPosts = [
   {
+    title: 'Pantone Color Match',
+    width: 1978,
+    height: 978,
+    urlBase: 'tools/'
+  },
+  {
     title: 'Pantone Now in the Color Tools',
     width: 2038,
     height: 1252

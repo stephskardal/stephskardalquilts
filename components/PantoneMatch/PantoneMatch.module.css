@@ -1,0 +1,47 @@
+.searchField {
+  text-align: right;
+}
+
+.resultWrapper {
+  margin-bottom: 30px;
+}
+
+.pantoneBoxWrapper {
+  text-align: center;
+}
+
+.pantoneBox {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+.resultsWrapper {
+  padding: 15px;
+  background-image: repeating-linear-gradient(
+    125deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 3px,
+    transparent 3px,
+    transparent 5px,
+    rgba(0, 0, 0, 0.05) 5px
+  );
+}
+
+.matchWrapper {
+  text-align: left;
+  font-size: 0.9em;
+  display: flex;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.miniMatch {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  margin-right: 5px;
+}
