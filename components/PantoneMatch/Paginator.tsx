@@ -20,7 +20,7 @@ const getMatch = (color) => {
           existingColor
         )
         colorByDistance.push({
-          key: swatch,
+          key: fabricSwatches[swatch].label,
           hex: fabricSwatches[swatch].swatches[swatchKey],
           swatchKey: swatchKey,
           distance: distance
