@@ -110,12 +110,29 @@ export default function Paginator(props: PaginatorProps) {
 
   return (
     <>
-      <Grid container spacing={2}>
-        <Grid md={6} xs={12}>
+      <Box sx={{ display: { sm: 'none', xs: 'block' } }}>
+        <Box sx={{ mb: '20px' }}>{paginationBit(count, page, 'top')}</Box>
+        <Box sx={{ mb: '30px' }}>
+          <TextField
+            sx={{ width: '100%' }}
+            size="small"
+            value={searchTerm}
+            label="Search Pantone Color"
+            onChange={handleSearch}
+          />
+        </Box>
+      </Box>
+      <Grid
+        container
+        spacing={2}
+        sx={{ mb: '20px', display: { sm: 'flex', xs: 'none' } }}
+      >
+        <Grid sm={6} xs={12}>
           {paginationBit(count, page, 'top')}
         </Grid>
-        <Grid md={6} xs={12} className={styles.searchField}>
+        <Grid sm={6} xs={12} className={styles.searchField}>
           <TextField
+            sx={{ width: '100%' }}
             size="small"
             value={searchTerm}
             label="Search Pantone Color"
