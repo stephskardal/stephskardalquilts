@@ -76,12 +76,13 @@ export default function Paginator(props: PaginatorProps) {
   }
 
   const filterColors = (colors: string[]) => {
-    return colors.filter((color) => {
-      return color.toLowerCase().match(searchTerm.toLowerCase())
-    })
+    return colors
+      .filter((color) => {
+        return color.toLowerCase().match(searchTerm.toLowerCase())
+      })
+      .sort()
   }
 
-  // SEARCH OR SORT ME
   let sortedColors = filterColors(props.colors)
 
   const count: number = Math.ceil(sortedColors.length / 10)
