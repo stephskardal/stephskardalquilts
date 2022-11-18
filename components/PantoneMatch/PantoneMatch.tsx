@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { fabricSwatches } from 'public/fabricSwatches'
 import { Typography } from '@mui/material'
-import Paginator from './Paginator'
+import Paginator from './PantonePaginator'
 import Link from 'next/link'
 
 export default function PantoneMatch() {

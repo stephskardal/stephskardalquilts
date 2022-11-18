@@ -6,7 +6,7 @@ import chroma from 'chroma-js'
 import styles from './PantoneMatch.module.css'
 
 export interface PaginatorProps {
-  colors: any[]
+  colors: string[]
 }
 
 const getMatch = (color) => {
@@ -143,10 +143,22 @@ export default function Paginator(props: PaginatorProps) {
       </Grid>
       {_DATA.currentData().map((color, index) => {
         let z = getMatch(color)
+        let [colorKey, ...name] = z.color.split(' ')
+        name = name.join(' ')
         return (
           <Box className={styles.resultWrapper}>
             <Box className={styles.pantoneBoxWrapper}>
-              <Typography component="div">{z.color}</Typography>
+              <Typography component="div">
+                {colorKey}
+                {name
+                  .replace(/-/, ' ')
+                  .split(/ /)
+                  .map((j) => {
+                    return ` ${j[0].toUpperCase()}${j
+                      .slice(1)
+                      .replace(/-/, ' ')}`
+                  })}
+              </Typography>
               <Box
                 className={styles.pantoneBox}
                 sx={{
