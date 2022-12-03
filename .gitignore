@@ -18,14 +18,10 @@ yarn-error.log*
 # Next.js
 /.next
 *.swp
-greendot-static/
 out/
 
 .yarn/install-state.gz
 .yarn/cache/**
-
-# Ignoring live synced data
-test_data/recent_builds/from_upstart/
 
 tsconfig.tsbuildinfo
 .turbo
