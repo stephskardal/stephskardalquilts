@@ -2000,6 +2000,7 @@ export const fabricSwatches = {
   pantone: {
     label: 'Pantone',
     swatches: {
+      '18-1750 Viva Magenta': '#BB2649',
       '17-3938 Very Peri': '#6667AB',
       'Yellow C': '#FEDD00',
       'Yellow 012 C': '#FFD700',
