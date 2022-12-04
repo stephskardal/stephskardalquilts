@@ -19,6 +19,12 @@ export default Blog
 
 let blogPosts = [
   {
+    title: 'A Quilty Solid: iOS App Release',
+    width: 978,
+    height: 978,
+    urlBase: 'blog/'
+  },
+  {
     title: 'Pantone Color Match',
     width: 1978,
     height: 978,

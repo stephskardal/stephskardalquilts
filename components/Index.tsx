@@ -63,15 +63,15 @@ export default function Index() {
             </Box>
             <Box sx={{ marginBottom: '20px' }}>
               <HeroImage
-                src="hero2.jpg"
-                text="Aurifil Artisan Challenge: December 2021"
-                link="/blog/aurifil-artisan-challenge-december-2021"
+                src="quiltysolid.png"
+                text="A Quilty Solid: Mobile App Released"
+                link="/aquiltysolid"
               />
             </Box>
             <HeroImage
-              src="AH6A2297.jpeg"
-              text="Aurifil Artisan Challenge: November 2021"
-              link="/blog/aurifil-artisan-challenge-november-2021"
+              src="hero2.jpg"
+              text="Aurifil Artisan Challenge: December 2021"
+              link="/blog/aurifil-artisan-challenge-december-2021"
             />
           </Grid>
         </Grid>
