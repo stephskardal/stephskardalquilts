@@ -22,125 +22,136 @@ features.
 
 Find the app [here](https://apps.apple.com/us/app/a-quilty-solid/id6444816769)!
 
-The first version of the app launches with:
-
-- A color list for each of the major solids manufacturers, with color detail per swatch.
-- A Pantone matcher which matches closest colors to each Pantone color.
-- A color palette tool which helps find solids colors matching to your uploaded photo.
-
-All tools include an additional brief help screen for more information.
+See release notes below on specific tools and color lines available per release. All tools include an additional brief help screen for more information.
 I expect to add more tools over time, as well as improve existing tools, as well as launch to Android as well.
 
 ## Screenshots of A Quilty Solid
 
 <Grid container spacing={2}>
-  <Grid
-    item
-    sm={6}
-    md={3}
-    style={{
-      border: '1px solid #ddd',
-      padding: '5px',
-      margin: '0px',
-      borderRadius: '10px'
-    }}
-  >
-    <BlogImage src="ios/home.png" width="1170" height="2532" />
+  <Grid item sm={6} md={3}>
+    <Box
+      style={{
+        border: '1px solid #ddd',
+        padding: '1px',
+        borderRadius: '5px'
+      }}
+    >
+      <BlogImage src="ios/home.png" width="1170" height="2532" />
+    </Box>
   </Grid>
-  <Grid
-    item
-    sm={6}
-    md={3}
-    style={{
-      border: '1px solid #ddd',
-      padding: '5px',
-      margin: '0px',
-      borderRadius: '10px'
-    }}
-  >
-    <BlogImage src="ios/color-list.png" width="1170" height="2532" />
+  <Grid item sm={6} md={3}>
+    <Box
+      style={{
+        border: '1px solid #ddd',
+        padding: '1px',
+        borderRadius: '5px'
+      }}
+    >
+      <BlogImage src="ios/color-list.png" width="1170" height="2532" />
+    </Box>
   </Grid>
-  <Grid
-    item
-    sm={6}
-    md={3}
-    style={{
-      border: '1px solid #ddd',
-      padding: '5px',
-      margin: '0px',
-      borderRadius: '10px'
-    }}
-  >
-    <BlogImage src="ios/swatch-detail.png" width="1170" height="2532" />
+  <Grid item sm={6} md={3}>
+    <Box
+      style={{
+        border: '1px solid #ddd',
+        padding: '1px',
+        borderRadius: '5px'
+      }}
+    >
+      <BlogImage src="ios/swatch-detail.png" width="1170" height="2532" />
+    </Box>
   </Grid>
-  <Grid
-    item
-    sm={6}
-    md={3}
-    style={{
-      border: '1px solid #ddd',
-      padding: '5px',
-      margin: '0px',
-      borderRadius: '10px'
-    }}
-  >
-    <BlogImage src="ios/help.png" width="1170" height="2532" />
+  <Grid item sm={6} md={3}>
+    <Box
+      style={{
+        border: '1px solid #ddd',
+        padding: '1px',
+        borderRadius: '5px'
+      }}
+    >
+      <BlogImage src="ios/help.png" width="1170" height="2532" />
+    </Box>
   </Grid>
 </Grid>
 
-<Grid container spacing={2} style={{ marginTop: '10px' }}>
-  <Grid
-    item
-    sm={6}
-    md={3}
-    style={{
-      border: '1px solid #ddd',
-      padding: '5px',
-      margin: '0px',
-      borderRadius: '10px'
-    }}
-  >
-    <BlogImage src="ios/pantone-matcher.png" width="1170" height="2532" />
+<Grid container spacing={2} style={{ marginTop: '0px' }}>
+  <Grid item sm={6} md={3}>
+    <Box
+      style={{
+        border: '1px solid #ddd',
+        padding: '1px',
+        borderRadius: '5px'
+      }}
+    >
+      <BlogImage src="ios/pantone-matcher.png" width="1170" height="2532" />
+    </Box>
   </Grid>
-  <Grid
-    item
-    sm={6}
-    md={3}
-    style={{
-      border: '1px solid #ddd',
-      padding: '5px',
-      margin: '0px',
-      borderRadius: '10px'
-    }}
-  >
-    <BlogImage src="ios/pantone-matcher-2.png" width="1170" height="2532" />
+  <Grid item sm={6} md={3}>
+    <Box
+      style={{
+        border: '1px solid #ddd',
+        padding: '1px',
+        borderRadius: '5px'
+      }}
+    >
+      <BlogImage src="ios/pantone-matcher-2.png" width="1170" height="2532" />
+    </Box>
   </Grid>
-  <Grid
-    item
-    sm={6}
-    md={3}
-    style={{
-      border: '1px solid #ddd',
-      padding: '5px',
-      margin: '0px',
-      borderRadius: '10px'
-    }}
-  >
-    <BlogImage src="ios/color-palette.png" width="1170" height="2532" />
+  <Grid item sm={6} md={3}>
+    <Box
+      style={{
+        border: '1px solid #ddd',
+        padding: '1px',
+        borderRadius: '5px'
+      }}
+    >
+      <BlogImage src="ios/color-palette.png" width="1170" height="2532" />
+    </Box>
   </Grid>
-  <Grid
-    item
-    sm={6}
-    md={3}
-    style={{
-      border: '1px solid #ddd',
-      padding: '5px',
-      margin: '0px',
-      borderRadius: '10px'
-    }}
-  >
-    <BlogImage src="ios/color-palette-2.png" width="1170" height="2532" />
+  <Grid item sm={6} md={3}>
+    <Box
+      style={{
+        border: '1px solid #ddd',
+        padding: '1px',
+        borderRadius: '5px'
+      }}
+    >
+      <BlogImage src="ios/color-palette-2.png" width="1170" height="2532" />
+    </Box>
   </Grid>
 </Grid>
 
 Please email me at stephskardal at gmail dot com with questions or concerns.
+
+## Beta Release 0.4.3 (December 2nd, 2022)
+
+Initial launch with features:
+
+- Color List: Index of color solids lines. Sortable by hue, saturation, and value.
+- Pantone matcher: Color matching against Pantone solids.
+- Image Color Palette: Color palette generation from provided image.
+- Solids lines included:
+  - Aurifil Thread
+  - paintbrush studio fabrics
+  - Pure Elements AGF Studio
+  - Free Spirit Solids
+  - Riley Blake Designs Confetti Cottons
+  - Robert Kaufman Kona Cotton
+  - Moda Bella Solids
+  - Clothworks American Made Brand Cotton Solids
+  - Michael Miller Cotton Couture
+  - RJR Studio Cotton Supremes
+  - Andover Century Solids
+  - Pantone
+
+## Release 0.4.4 (Not yet released)
+
+- Tool updates:
+  - Alphabetization of color swatch keys on all tools
+  - Removal of duplicate color matches on Image Color Palette
+- Solids line changes:
+  - Colors of the Year (COTY) 2023 for Pantone and Kona added
+  - Addition of Northcott Colorworks Premium Solids
+  - Updated Painters palette solids released in mid 2022
+- Other:
+  - Removal of unused depencies to reduce app size
