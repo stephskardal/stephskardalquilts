@@ -1,35 +1,35 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#40637A",
+      main: '#40637A'
     },
     success: {
-      main: "#287E29",
+      main: '#287E29'
     },
     secondary: {
-      main: "#F6BE00",
+      main: '#F6BE00'
     },
     error: {
-      main: "#8B0000",
+      main: '#8B0000'
     },
     info: {
-      main: "#DDDDDD",
+      main: '#DDDDDD'
     },
     warning: {
-      main: "#9acd32",
-    },
+      main: '#9acd32'
+    }
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          overflow: "scroll",
-        },
-      },
-    },
-  },
-});
+          overflow: 'scroll'
+        }
+      }
+    }
+  }
+})
 
-export default theme;
+export default theme

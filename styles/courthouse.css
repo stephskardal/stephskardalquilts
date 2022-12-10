@@ -95,7 +95,7 @@
   margin-bottom: 10px;
 }
 
-.courthouse-steps .block_row>div {
+.courthouse-steps .block_row > div {
   margin-right: 10px;
 }
 
@@ -130,7 +130,7 @@
   height: 99px;
 }
 
-.courthouse-steps #step2-blocks>div {
+.courthouse-steps #step2-blocks > div {
   width: 81px;
   position: relative;
 }
@@ -237,11 +237,11 @@
   text-align: center;
 }
 
-.courthouse-steps .step13 .flex_vertical.outer>div.strip_horizontal {
+.courthouse-steps .step13 .flex_vertical.outer > div.strip_horizontal {
   height: 100px;
 }
 
-.courthouse-steps .step13 .flex_horizontal.outer>div.strip_vertical {
+.courthouse-steps .step13 .flex_horizontal.outer > div.strip_vertical {
   width: 100px;
 }
 
